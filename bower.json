@@ -1,0 +1,26 @@
+{
+  "name": "backend-api",
+  "description": "This boilerplate is built with Gulp 4, Pug, Sass, Browsersync and Express 4",
+  "main": "",
+  "authors": [
+    "Loc Thanh <locnt19@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/locnt19/backend-api.git",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fancybox": "^3.5.7",
+    "swiper": "^5.0.4",
+    "jquery": "^3.4.1",
+    "font-awesome": "^5.11.2",
+    "mdi": "^4.5.95",
+    "linearicons": "^1.0.1",
+    "bootstrap": "^4.3.1"
+  }
+}

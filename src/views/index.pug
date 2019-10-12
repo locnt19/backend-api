@@ -1,0 +1,18 @@
+extends layout
+
+block main
+  h1= title
+  h3 Current route: #{currentRoute}
+  h3 This route was created in: #{routeCreated}
+  h3 Backdrop: #{backdrop}
+  p #{content}
+  .routes-wrap
+    a(href="/") Route Index
+    a(href="/users") Route Users
+  section.container.grid-container
+    .img-left-top
+      img(src="/images/express.png", alt="express.png")
+    .img-left-bottom
+      img(src="/images/browsersync.png", alt="browsersync.png")
+    .img-right
+      img(src="/images/gulp-pug-sass-bower.png", alt="gulp.png")

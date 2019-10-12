@@ -1,0 +1,15 @@
+{
+	"fonts": [
+		"bower_components/mdi/fonts/*",
+		"bower_components/font-awesome/webfonts/*",
+		"bower_components/linearicons/dist/web-font/fonts/*"
+	],
+	"styles": [
+		"src/styles/imports/**",
+		"bower_components/bootstrap/dist/css/bootstrap-grid.min.css",
+		"bower_components/mdi/css/materialdesignicons.min.css"
+	],
+	"scripts": [
+		"bower_components/jquery/dist/jquery.min.js"
+	]
+}

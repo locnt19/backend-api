@@ -1,0 +1,25 @@
+body
+	font-family: 'Source Sans Pro', sans-serif
+.routes-wrap
+	a
+		color: #F14646
+		text-decoration: none
+		font-weight: 600
+		margin-right: 10px
+		transition: all .15s
+		&:hover
+			box-shadow: 0 2px 0 0 #666
+.grid-container
+	display: grid
+	grid-template-columns: 1fr 1fr
+	grid-template-areas: 'img-left-top img-right' 'img-left-bottom img-right'
+	.img-right,
+	.img-left-top,
+	.img-left-bottom,
+		text-align: center
+	.img-right
+		grid-area: img-right
+	.img-left-top
+		grid-area: img-left-top
+	.img-left-bottom
+		grid-area: img-left-bottom
