@@ -1,18 +1,89 @@
 extends layout
 
 block main
-  h1= title
-  h3 Current route: #{currentRoute}
-  h3 This route was created in: #{routeCreated}
-  h3 Backdrop: #{backdrop}
-  p #{content}
-  .routes-wrap
-    a(href="/") Route Index
-    a(href="/users") Route Users
-  section.container.grid-container
-    .img-left-top
-      img(src="/images/express.png", alt="express.png")
-    .img-left-bottom
-      img(src="/images/browsersync.png", alt="browsersync.png")
-    .img-right
-      img(src="/images/gulp-pug-sass-bower.png", alt="gulp.png")
+  .container-fluid
+    .row
+      .col-1(style="padding: 0")
+        include partials/sidebar.pug
+      .col-11
+        .row-space-between(style="margin-top: 5px")
+          include partials/search-box.pug
+          include partials/user-action.pug
+        .customers-container
+          h1.title Customers
+          nav.nav-customers
+            li
+              a(href="#") All customers
+            li
+              a(href="#") Recent customers
+            li
+              a(href="#") Starred customers
+            li
+              a(href="#") My customers
+          .action-customers
+            .row-space-between(style="margin-top: 15px")
+              .dropdown
+                button.btn.btn-dropdown Actions
+                .dropdown-content
+                  a(href="#").mdi.mdi-pencil Edit customer
+                  a(href="#").mdi.mdi-delete Delete customer
+              button.btn.btn-primary New customer
+            .row-space-between(style="margin-top: 15px")
+              .display-mode
+                span Showing 
+                span 1
+                span  to 
+                span 10
+                span  of 
+                span 55
+                span  items
+              .filter-records
+                label(for="filter-records") Filter records:
+                input( id="filter-records" type="text")
+            .records-customers(style="margin: 15px 0")
+              table
+                thead
+                  tr
+                    th
+                      .custom-checkbox
+                        input.checkbox(type="checkbox" id='all')
+                        label(for="all")
+                    th Name
+                    th Type
+                    th Created by
+                    th Created
+                    th Live
+                tbody
+                  tr
+                    td(data-label="Select")
+                      .custom-checkbox
+                        input.checkbox(type="checkbox" id='1')
+                        label(for="1")
+                    td(data-label="Name") Nguyen Thanh Loc
+                    td(data-label="Type") Customer
+                    td(data-label="Created by") Nguyen Thanh Loc
+                    td(data-label="Created") 19/09/2019
+                    td(data-label="Live")
+                      span.mdi.mdi-check-circle
+                  tr
+                    td(data-label="Select")
+                      .custom-checkbox
+                        input.checkbox(type="checkbox" id='2')
+                        label(for="2")
+                    td(data-label="Name") Jane Doe
+                    td(data-label="Type") Customer
+                    td(data-label="Created by") Dartmouth
+                    td(data-label="Created") 19/09/2019
+                    td(data-label="Live")
+                      span.mdi.mdi-close-box
+                  tr
+                    td(data-label="Select")
+                      .custom-checkbox
+                        input.checkbox(type="checkbox" id='3')
+                        label(for="3")
+                    td(data-label="Name") Vancouver
+                    td(data-label="Type") Customer
+                    td(data-label="Created by") Jason
+                    td(data-label="Created") 19/09/2019
+                    td(data-label="Live")
+                      span.mdi.mdi-check-circle

@@ -1,25 +1,318 @@
+$color-1: #E5E5E5
+
 body
 	font-family: 'Source Sans Pro', sans-serif
-.routes-wrap
-	a
-		color: #F14646
-		text-decoration: none
-		font-weight: 600
-		margin-right: 10px
+	font-weight: 400
+	font-size: 16px
+	color: #707070
+a
+	color: inherit
+	text-decoration: none
+li
+	list-style: none
+
+
+// ====== GOLBAL STYLE ======
+.row-space-between
+	display: flex
+	align-items: center
+	justify-content: space-between
+.btn
+	display: inline-block
+	font-weight: 400
+	text-align: center
+	vertical-align: middle
+	user-select: none
+	font-size: 16px
+	color: #fff
+	border: 1px solid transparent
+	padding: 5px 10px
+	outline: none
+	line-height: 1.5
+	cursor: pointer
+	border-radius: 4px
+.btn-primary
+	background-color: #007bff
+  border-color: #007bff
+	&:hover
+		background-color: #0069d9
+		border-color: #0062cc
+.btn-dropdown
+	padding-right: 5px
+	border-color: #6c757d
+	background: #6c757d
+	&:after
+		margin-left: 5px
+		content: '\F35D'
+		display: inline-block
+		font-family: 'Material Design Icons'
+		font-size: inherit
+		text-rendering: auto
+		line-height: 1
+		-webkit-font-smoothing: antialiased
+		-moz-osx-font-smoothing: grayscale
+	&:hover
+		background: #5a6268
+		border-color: #545b62
+.dropdown
+	position: relative
+	&:hover
+		.dropdown-content
+			opacity: 1
+			visibility: visible
+	.dropdown-content
+		background: #fff
+		border: 1px solid #E5E5E5
+		border-radius: 4px
+		position: absolute
+		visibility: hidden
+		white-space: nowrap
+		opacity: 0
 		transition: all .15s
-		&:hover
-			box-shadow: 0 2px 0 0 #666
-.grid-container
-	display: grid
-	grid-template-columns: 1fr 1fr
-	grid-template-areas: 'img-left-top img-right' 'img-left-bottom img-right'
-	.img-right,
-	.img-left-top,
-	.img-left-bottom,
+		a
+			display: block
+			padding: 7px 10px
+			margin: 5px 0
+			&:before
+				margin-right: 5px
+			&:hover
+				color: #fff
+				background: #BC4539
+.custom-checkbox
+	width: 16px
+	height: 16px
+	position: relative
+	margin: 0 auto
+	font-size: 12px
+	font-weight: 400
+	input
+		&:not(:checked),
+		&:checked
+			display: none
+		&:not(:checked) + label:before,
+		&:checked + label:before
+			content: ''
+			position: absolute
+			top: 0
+			left: 0
+			bottom: 0
+			right: 0
+			background: #fff
+			border-radius: 4px
+			box-shadow: inset 0 0 2px 1px #c8c8c8
+		&:checked + label:before
+			background: #f5a623
+		&:not(:checked) + label:after,
+		&:checked + label:after
+			position: absolute
+			top: 50%
+			left: 50%
+			color: #fff
+			transition: all .2s
+			// icon
+			content: '\F12C'
+			display: inline-block
+			font-family: 'Material Design Icons'
+			text-rendering: auto
+			line-height: 1
+			-webkit-font-smoothing: antialiased
+			-moz-osx-font-smoothing: grayscale
+		&:not(:checked) + label:after
+			opacity: 0
+			transform: scale(0)
+		&:checked + label:before
+			box-shadow: none
+		&:checked + label:after
+			opacity: 1
+			transform: translate(-50%, -50%) scale(1)
+
+
+
+// ====== SIDEBAR ======
+.sidebar
+	height: 100vh
+	background: #FBEBF3
+	display: flex
+	flex-direction: column
+	position: fixed
+	top: 0
+	left: 0
+	max-width: 8.333333% // width of col-1
+.sidebar-logo
+	padding: 10px
+	img
+		width: 100%
+.sidebar-content
+	color: #D2398C
+	height: 100%
+	overflow-y: auto
+	&::-webkit-scrollbar
+		width: 4px
+	&::-webkit-scrollbar-track
+		background: #E5E5E5
+		border-radius: 99px
+	&::-webkit-scrollbar-thumb
+		border-radius: 99px
+		background: rgba(#D2398C,.3)
+	&::-webkit-scrollbar-thumb:hover
+		background: #D2398C
+	li
 		text-align: center
-	.img-right
-		grid-area: img-right
-	.img-left-top
-		grid-area: img-left-top
-	.img-left-bottom
-		grid-area: img-left-bottom
+		margin-top: 30px
+	a
+		display: inline-flex
+		flex-direction: column
+	i
+		display: inline-block
+		font-family: 'Material Design Icons'
+		font-size: inherit
+		text-rendering: auto
+		line-height: 1
+		-webkit-font-smoothing: antialiased
+		-moz-osx-font-smoothing: grayscale
+		&:before
+			font-size: 36px
+
+
+// ====== USER-ACTION ======
+.search-box
+	display: inline-flex
+	align-items: center
+	border-radius: 4px
+	background: #fff
+	border: 1px solid #E5E5E5
+	padding: 3px
+	padding-left: 15px
+	input, button
+		border: none
+		outline: none
+		background: none
+	input
+		width: 150px
+	button
+		color: #707070
+		font-size: 20px
+
+// ====== USER-ACTION ======
+.user-action
+	display: inline-block
+	position: relative
+	line-height: 1.5
+	.username
+		cursor: pointer
+		user-select: none
+		&:after
+			padding-left: 5px
+			content: '\F35D'
+			display: inline-block
+			font-family: 'Material Design Icons'
+			font-size: inherit
+			text-rendering: auto
+			line-height: 1
+			-webkit-font-smoothing: antialiased
+			-moz-osx-font-smoothing: grayscale
+	.nav-actions
+		position: absolute
+		top: 100%
+		right: 0
+		margin-top: 5px
+		border-radius: 4px
+		background: #ffffff
+		box-shadow: 0 0 3px 0 #707070
+		z-index: -1
+		opacity: 0
+		transition: all .3s
+		&.active
+			opacity: 1
+			z-index: 1
+		a
+			display: block
+		li
+			padding: 5px 10px
+			&:not(:first-child)
+				border-top: 1px solid #BEBDB4
+			&:hover
+				background: #E5E5E5
+
+
+// ====== CUSTOMERS-CONTAINER ======
+.customers-container
+	margin-top: 30px
+	.title
+		font-size: 36px
+		font-weight: 700
+	.nav-customers
+		margin-top: 10px
+		box-shadow: 0 1px 0 0 #E5E5E5
+		li
+			display: inline-block
+			padding: 12px 20px
+			&:hover
+				box-shadow: inset 0 -2px 0 0 #d2398c
+
+
+// ====== FILTER-RECORDS ======
+.filter-records
+	label
+		margin-right: 10px
+	input
+		border-radius: 4px
+		background: #fff
+		border: 1px solid #E5E5E5
+		padding: 8px 15px
+
+
+// ====== RECORDS-CUSTOMERS ======
+.records-customers
+	.mdi-check-circle
+		color: #28a745
+	.mdi-close-box
+		color: #dc3545
+	table
+		border: 1px solid #ccc
+		border-collapse: collapse
+		margin: 0
+		padding: 0
+		width: 100%
+		thead
+			tr
+				background: #f8f8f8 !important
+		tr
+			background: #fff
+			border: 1px solid #ddd
+			padding: 5px
+			&:hover
+				background: #DAEFF3
+		th
+			font-weight: 700
+			font-size: 14px
+			letter-spacing: 2px
+			text-transform: uppercase
+		th, td
+			width: auto
+			padding: 8px
+			text-align: center
+			vertical-align: middle
+@media screen and (max-width: 767.97px)
+	.records-customers
+		table
+			border: 0
+			thead
+				display: none
+			tr
+				border-bottom: 3px solid #ddd
+				display: block
+				margin-bottom: 15px
+			td
+				border-bottom: 1px solid #ddd
+				display: block
+				text-align: right
+				&:before
+					content: attr(data-label)
+					float: left
+					font-weight: 600
+					font-size: 14px
+					letter-spacing: 2px
+					text-transform: uppercase
+				&:last-child
+					border-bottom: 0
