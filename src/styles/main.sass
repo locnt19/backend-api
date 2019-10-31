@@ -281,7 +281,8 @@ li
 			background: #fff
 			border: 1px solid #ddd
 			padding: 5px
-			&:hover
+			&:hover,
+			&.selected
 				background: #DAEFF3
 		th
 			font-weight: 700
@@ -316,3 +317,17 @@ li
 					text-transform: uppercase
 				&:last-child
 					border-bottom: 0
+		.custom-checkbox
+			margin: 0
+			margin-left: auto
+
+.records-selected
+	display: none
+	color: #fff
+	line-height: 1
+	padding: 5px
+	font-size: 14px
+	border-radius: 4px
+	margin-left: 10px
+	margin-right: auto
+	background: darken(#DAEFF3, 40)

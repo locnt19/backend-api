@@ -37,6 +37,9 @@ block main
                 span  of 
                 span 55
                 span  items
+              .records-selected
+                span 10
+                span  records selected
               .filter-records
                 label(for="filter-records") Filter records:
                 input( id="filter-records" type="text")
@@ -46,7 +49,7 @@ block main
                   tr
                     th
                       .custom-checkbox
-                        input.checkbox(type="checkbox" id='all')
+                        input.checkbox(type="checkbox" id="all" value="select-all")
                         label(for="all")
                     th Name
                     th Type
@@ -54,36 +57,28 @@ block main
                     th Created
                     th Live
                 tbody
-                  tr
-                    td(data-label="Select")
-                      .custom-checkbox
-                        input.checkbox(type="checkbox" id='1')
-                        label(for="1")
-                    td(data-label="Name") Nguyen Thanh Loc
-                    td(data-label="Type") Customer
-                    td(data-label="Created by") Nguyen Thanh Loc
-                    td(data-label="Created") 19/09/2019
-                    td(data-label="Live")
-                      span.mdi.mdi-check-circle
-                  tr
-                    td(data-label="Select")
-                      .custom-checkbox
-                        input.checkbox(type="checkbox" id='2')
-                        label(for="2")
-                    td(data-label="Name") Jane Doe
-                    td(data-label="Type") Customer
-                    td(data-label="Created by") Dartmouth
-                    td(data-label="Created") 19/09/2019
-                    td(data-label="Live")
-                      span.mdi.mdi-close-box
-                  tr
-                    td(data-label="Select")
-                      .custom-checkbox
-                        input.checkbox(type="checkbox" id='3')
-                        label(for="3")
-                    td(data-label="Name") Vancouver
-                    td(data-label="Type") Customer
-                    td(data-label="Created by") Jason
-                    td(data-label="Created") 19/09/2019
-                    td(data-label="Live")
-                      span.mdi.mdi-check-circle
+                  -for( var i = 0; i < 10; i++)
+                    if i%2
+                      tr
+                        td(data-label="Select")
+                          .custom-checkbox
+                            input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}` )
+                            label(for=`id-${i}`)
+                        td(data-label="Name") Nguyen Thanh Loc
+                        td(data-label="Type") Customer
+                        td(data-label="Created by") Nguyen Thanh Loc
+                        td(data-label="Created") 19/09/2019
+                        td(data-label="Live")
+                          span.mdi.mdi-check-circle
+                    else 
+                      tr
+                        td(data-label="Select")
+                          .custom-checkbox
+                            input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}`)
+                            label(for=`id-${i}`)
+                        td(data-label="Name") Jane Doe
+                        td(data-label="Type") Customer
+                        td(data-label="Created by") Dartmouth
+                        td(data-label="Created") 19/09/2019
+                        td(data-label="Live")
+                          span.mdi.mdi-close-box
