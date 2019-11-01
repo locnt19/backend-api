@@ -9,9 +9,15 @@ html
     link(rel='stylesheet' href='/stylesheets/main.min.css')
     title= title
   body
-    block header
-    main
-      block main
-    block footer
+    section.body-wrapper
+      block sidebar
+        include partials/sidebar
+      .main-wrapper
+        block header
+          include partials/header
+        main
+          block main
+        block footer
+          include partials/footer
     script(src="/javascripts/libs.min.js")
     script(src="/javascripts/main.min.js")

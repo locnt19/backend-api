@@ -1,0 +1,55 @@
+
+// ====== SIDEBAR ======
+.sidebar
+	width: 128px
+	height: 100vh
+	display: flex
+	flex-direction: column
+	background: #FBEBF3
+	position: sticky
+	top: 0
+	left: 0
+	z-index: 3
+	transition: width .3s ease-in-out
+	&.collapse,
+		width: 50px
+		.sidebar-header
+			padding: 3px
+		.sidebar-body
+			li
+				margin-top: 15px
+				i
+					font-size: 24px
+			span
+				display: none
+	.sidebar-header
+		padding: 10px
+	.sidebar-body
+		color: #D2398C
+		height: 100%
+		overflow-y: auto
+		&::-webkit-scrollbar
+			width: 4px
+		&::-webkit-scrollbar-track
+			background: #E5E5E5
+			border-radius: 99px
+		&::-webkit-scrollbar-thumb
+			border-radius: 99px
+			background: rgba(#D2398C,.3)
+		&::-webkit-scrollbar-thumb:hover
+			background: #D2398C
+		li
+			text-align: center
+			margin-top: 30px
+		a
+			display: inline-flex
+			flex-direction: column
+		i
+			display: inline-block
+			font-family: 'Material Design Icons'
+			font-size: inherit
+			text-rendering: auto
+			line-height: 1
+			-webkit-font-smoothing: antialiased
+			-moz-osx-font-smoothing: grayscale
+			font-size: 36px

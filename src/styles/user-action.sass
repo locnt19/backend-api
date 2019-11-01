@@ -1,0 +1,41 @@
+.user-action
+	display: inline-block
+	position: relative
+	line-height: 1.5
+	.username
+		cursor: pointer
+		margin-left: 10px
+		user-select: none
+		&:after
+			padding-left: 5px
+			content: '\F35D'
+			display: inline-block
+			font-family: 'Material Design Icons'
+			font-size: inherit
+			text-rendering: auto
+			line-height: 1
+			-webkit-font-smoothing: antialiased
+			-moz-osx-font-smoothing: grayscale
+	.nav-actions
+		position: absolute
+		top: 100%
+		right: 0
+		margin-top: 5px
+		border-radius: 4px
+		background: #ffffff
+		box-shadow: 0 0 3px 0 #707070
+		z-index: -1
+		opacity: 0
+		visibility: hidden
+		transition: all .3s
+		&.active
+			visibility: visible
+			opacity: 1
+			z-index: 1
+		a
+			display: block
+			padding: 5px 15px
+			margin: 5px 0
+			white-space: nowrap
+			&:hover
+				background: #E5E5E5

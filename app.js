@@ -7,7 +7,7 @@ var logger = require('morgan');
 
 // INCLUDE ROUTES BEFORE INITIALIZING
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var customersRouter = require('./routes/customers');
 
 
 var app = express();
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // INITIALIZE ROUTES
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/customers', customersRouter);
 
 
 // catch 404 and forward to error handler

@@ -1,0 +1,169 @@
+extends layout
+
+block main
+	.customers-wrapper
+		h1.title Customers
+		nav.nav-customers
+			li
+				a(href="#") All customers
+			li
+				a(href="#") Recent customers
+			li
+				a(href="#") Starred customers
+			li
+				a(href="#") My customers
+		.row-justify(style="margin-top: 15px")
+			.dropdown
+				button.btn.btn-dropdown Actions
+				.dropdown-content
+					a(href="#").mdi.mdi-pencil.edit-bg#edit-customer Edit customer
+					a(href="#").mdi.mdi-delete.delete-bg#delete-customer Delete customer
+			button.btn.btn-primary#new-customer New customer
+		.table-wrapper(style="margin-top: 15px")
+			.row-justify
+				.table-showing
+					span Showing 
+					span 1
+					span  to 
+					span 10
+					span  of 
+					span 55
+					span  items
+				.table-row-selected
+					span 10
+					span  records selected
+				.table-filter
+					label(for="table-filter") Filter records:
+					input( id="table-filter" type="text")
+			table(style="margin: 10px 0")
+				thead
+					tr
+						th
+							.custom-checkbox
+								input.checkbox(type="checkbox" id="all" value="select-all")
+								label(for="all")
+						th Avatar
+						th Name
+						th Type
+						th Created by
+						th Created
+						th Live
+				tbody
+					-for( var i = 0; i < 20; i++)
+						if i%2
+							tr
+								td(data-label="Select")
+									.custom-checkbox
+										input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}` )
+										label(for=`id-${i}`)
+								td(data-label="Avatar")
+									.avatar-thumb
+										img(src="images/avatar.jpg", alt="avatar")
+								td(data-label="Name") Nguyen Thanh Loc
+								td(data-label="Type") Customer
+								td(data-label="Created by") Nguyen Thanh Loc
+								td(data-label="Created") 19/09/2019
+								td(data-label="Live")
+									span.mdi.mdi-check-circle
+						else 
+							tr
+								td(data-label="Select")
+									.custom-checkbox
+										input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}`)
+										label(for=`id-${i}`)
+								td(data-label="Avatar")
+									.avatar-thumb
+										img(src="images/avatar.jpg", alt="avatar")
+								td(data-label="Name") Jane Doe
+								td(data-label="Type") Customer
+								td(data-label="Created by") Dartmouth
+								td(data-label="Created") 19/09/2019
+								td(data-label="Live")
+									span.mdi.mdi-close-box
+			.row-justify
+				nav.table-pagination
+					a(href="#").prev.disabled Previous
+					a(href="#") 1
+					a(href="#") 2
+					a(href="#") 3
+					a(href="#").next Next
+				.table-show-more
+					label Show
+						select(name="display-number")
+							option(value="10") 10
+							option(value="20") 20
+							option(value="50") 50
+							option(value="100") 100
+							option(value="all") All
+						| entries
+
+
+	//- =============== MODAL ===============
+	form.modal#modal-new-customer
+		.modal-title
+			h3 New Customer
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			.form-control
+				label(for="new-name") Name
+				input(type="text" id="new-name")
+			.form-control
+				label(for="new-type") Type
+				select(id="new-type")
+					option(value="-1") Please choose...
+					option(value="0") Normal
+					option(value="1") Silver
+					option(value="2") Gold
+					option(value="3") Diamond
+		.modal-footer
+			button(type="submit").btn.btn-primary Save
+			button(type="reset") Cancel
+	form.modal.modal-warning#modal-delete-customer
+		.modal-title
+			h3 Delete Customer
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			p Delete the customer will:
+			ul
+				li
+					p
+						strong Delete all data
+						span  relating to the customer
+				li
+					p
+						strong Delete all files
+						span  attached to the customer
+				li
+					p
+						strong Delete all notes
+						span  attached to the customer
+			.tick
+				.custom-checkbox
+					input.checkbox(type="checkbox" id="accept-delete")
+					label(for="accept-delete")
+				label(for="accept-delete") I understand this action cannot be undone.
+		.modal-footer
+			button(type="submit").btn.btn-warning Delete Customer
+			button(type="reset") Cancel
+	form.modal#modal-edit
+		.modal-title
+			h3 Edit Customer
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			.form-control
+				label(for="edit-name") Name
+				input(type="text" id="edit-name")
+			.form-control
+				label(for="edit-type") Type
+				select(id="edit-type")
+					option(value="-1") Please choose...
+					option(value="0") Normal
+					option(value="1") Silver
+					option(value="2") Gold
+					option(value="3") Diamond
+			.form-control
+				label(for="edit-date") Birthday
+				input(type="text" id="edit-date").datepicker
+		.modal-footer
+			button(type="submit").btn.btn-primary Save
+			button(type="reset") Cancel
