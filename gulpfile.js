@@ -3,6 +3,7 @@ const
   del = require('del'),
   nodemon = require('gulp-nodemon'),
   browserSync = require('browser-sync').create(),
+  babel = require('gulp-babel'),
   uglify = require('gulp-uglify'),
   concat = require('gulp-concat'),
   plumber = require('gulp-plumber'),
@@ -80,6 +81,9 @@ gulp.task('dev:scripts', function () {
         console.log(error.message);
         this.emit('end');
       }
+    }))
+    .pipe(babel({
+      presets: ['@babel/preset-env']
     }))
     .pipe(rename({
       suffix: '.min'
@@ -201,10 +205,10 @@ gulp.task('watch:views', function (done) {
 
 
 // WATCH ROUTES
-  gulp.task('watch:routes', function (done) {
-    gulp.watch('routes/*').on('change', browserSync.reload);
-    done();
-  });
+gulp.task('watch:routes', function (done) {
+  gulp.watch('routes/*').on('change', browserSync.reload);
+  done();
+});
 
 
 // DEV
