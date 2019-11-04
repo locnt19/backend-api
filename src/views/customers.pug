@@ -58,11 +58,10 @@ block main
 										input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}` )
 										label(for=`id-${i}`)
 									.show-more.plus
-								//- td.show-more
-								//- 	span.plus
 								td(data-label="Avatar")
 									.avatar-thumb
-										img(src="images/avatar.jpg", alt="avatar")
+										a(href="images/avatar.jpg" data-fancybox)
+											img(src="images/avatar.jpg", alt="avatar")
 								td(data-label="Name") Nguyen Thanh Loc
 								td(data-label="Type") Customer
 								td(data-label="Created by") Nguyen Thanh Loc
@@ -73,14 +72,13 @@ block main
 							tr
 								td(data-label="Select")
 									.custom-checkbox
-										input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}`)
+										input(type="checkbox" id=`id-${i}` value=`id-${i}`)
 										label(for=`id-${i}`)
 									.show-more.plus
-								//- td.show-more
-								//- 	span.plus
 								td(data-label="Avatar")
 									.avatar-thumb
-										img(src="images/avatar.jpg", alt="avatar")
+										a(href="images/avatar.jpg" data-fancybox)
+											img(src="images/avatar.jpg", alt="avatar")
 								td(data-label="Name") Jane Doe
 								td(data-label="Type") Customer
 								td(data-label="Created by") Dartmouth
@@ -88,7 +86,6 @@ block main
 								td(data-label="Live")
 									span.close
 						tr.tr-child
-							//- td
 							td
 							td(colspan="6")
 								table.table-child
@@ -120,7 +117,7 @@ block main
 
 
 	//- =============== MODAL ===============
-	form.modal#modal-new-customer
+	form.modal#modal-new
 		.modal-title
 			h3 New Customer
 			button(type="reset").mdi.mdi-close
@@ -139,7 +136,7 @@ block main
 		.modal-footer
 			button(type="submit").btn.btn-primary Save
 			button(type="reset") Cancel
-	form.modal.modal-warning#modal-delete-customer
+	form.modal.modal-warning#modal-delete
 		.modal-title
 			h3 Delete Customer
 			button(type="reset").mdi.mdi-close
@@ -171,6 +168,12 @@ block main
 			h3 Edit Customer
 			button(type="reset").mdi.mdi-close
 		.modal-body
+			.form-control
+				label(for="edit-avatar") Avatar
+				.change-avatar
+					.avatar-thumb
+						img(src="images/avatar.jpg", alt="avatar.jpg")
+					input(type="file" id="edit-avatar")
 			.form-control
 				label(for="edit-name") Name
 				input(type="text" id="edit-name")

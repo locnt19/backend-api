@@ -1,0 +1,26 @@
+extends layout
+
+block main
+	h2 Upload ,Crop and save.
+	//- input file 
+	.box
+		input#file-input(type='file')
+	//- leftbox 
+	.box-2
+		.result
+	//- rightbox
+	.box-2.img-result.hide
+		//- result of crop 
+		img.cropped(src, alt)
+	//- input file 
+	.box
+		.options.hide
+			label Width
+			input.img-w(type='number', value='300', min='100', max='1200')
+		//- save btn 
+		button.btn.save.hide Save
+		//- download btn 
+		a.btn.download.hide(href) Download
+	h1 Preview avatar
+	.box-img(style="width: 300px; height: 300px; margin: 0 auto")
+		img(src="", alt="Preview avatar")

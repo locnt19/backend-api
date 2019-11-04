@@ -34,20 +34,29 @@ $(document).ready(function () {
 
 	// ================= CUSTOMERS UI =================
 	// Open modal when click add new customers
-	$('#new-customer').on('click', function () {
-		$('#modal-new-customer').show();
-	});
-	$('#delete-customer').on('click', function () {
-		$('#modal-delete-customer').show();
-	});
-	$('#edit-customer').on('click', function () {
-		$('#modal-edit-customer').show();
-	});
+	var ListEventCustomersModal = [{
+			'idButton': '#new-customer',
+			'idModal': '#modal-new'
+		},
+		{
+			'idButton': '#delete-customer',
+			'idModal': '#modal-delete'
+		},
+		{
+			'idButton': '#edit-customer',
+			'idModal': '#modal-edit'
+		}
+	];
+	for (const item of ListEventCustomersModal) {
+		$(item.idButton).on('click', function () {
+			$(item.idModal).show();
+		})
+	};
 
 	// Set background when tick records customers
-	var $SelectAllRecordsCustomers = $('.table-wrapper thead input:checkbox');
-	var $ListRecordsCustomers = $('.table-wrapper tbody input:checkbox');
-	var $ShowTotalRecordsSelected = $('.action-customers .table-row-selected');
+	var $SelectAllRecordsCustomers = $('.table-parent thead input:checkbox');
+	var $ListRecordsCustomers = $('.table-parent tbody input:checkbox');
+	var $ShowTotalRecordsSelected = $('.table-row-selected');
 	var TotalRecordSelected = 0;
 
 	function showTotalRecordsSelected() {
@@ -105,4 +114,73 @@ $(document).ready(function () {
 		$(this).parents('tr').toggleClass('more');
 		$(this).parents('tr').next('.tr-child').toggleClass('show');
 	})
+
+	// Preview avatar before upload to Server
+
+	// vars
+	var $PreviewAvatar = $('.preview-avatar'),
+		$AvatarAfterCrop = $('.avatar-after-crop'),
+		$SetAvatarWitdh = $('.avatar-width'),
+		$SetAvatarHeight = $('.avatar-height'),
+		$SaveAvatarAfterCrop = $('.save-avatar'),
+		$DownloadAvatar = $('.download-avatar'),
+		$UploadAvatar = $('.upload-avatar');
+	
+	let result = document.querySelector('.result'),
+		img_result = document.querySelector('.img-result'),
+		img_w = document.querySelector('.img-w'),
+		img_h = document.querySelector('.img-h'),
+		options = document.querySelector('.options'),
+		save = document.querySelector('.save'),
+		cropped = document.querySelector('.cropped'),
+		dwn = document.querySelector('.download'),
+		upload = document.querySelector('#file-input'),
+		cropper = '';
+
+	// on change show image with crop options
+	upload.addEventListener('change', (e) => {
+		if (e.target.files.length) {
+			// start file reader
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				if (e.target.result) {
+					// create new image
+					let img = document.createElement('img');
+					img.id = 'image';
+					img.src = e.target.result
+					// clean result before
+					result.innerHTML = '';
+					// append new image
+					result.appendChild(img);
+					// show save btn and options
+					save.classList.remove('hide');
+					options.classList.remove('hide');
+					// init cropper
+					cropper = new Cropper(img);
+				}
+			};
+			reader.readAsDataURL(e.target.files[0]);
+		}
+	});
+
+	// save on click
+	save.addEventListener('click', (e) => {
+		e.preventDefault();
+		// get result to data uri
+		let imgSrc = cropper.getCroppedCanvas({
+			width: img_w.value // input value
+		}).toDataURL();
+		// remove hide class of img
+		cropped.classList.remove('hide');
+		img_result.classList.remove('hide');
+		// show image cropped
+		cropped.src = imgSrc;
+		dwn.classList.remove('hide');
+		dwn.download = 'imagename.png';
+		dwn.setAttribute('href', imgSrc);
+	});
+
+
+
+
 });
