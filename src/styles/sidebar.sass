@@ -5,25 +5,32 @@
 	height: 100vh
 	display: flex
 	flex-direction: column
-	background: #FBEBF3
-	position: sticky
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3)
+	position: fixed
 	top: 0
-	left: 0
+	left: -200px
 	z-index: 3
-	transition: width .3s ease-in-out
-	&.collapse,
-		width: 50px
-		.sidebar-header
-			padding: 3px
-		.sidebar-body
-			li
-				margin-top: 15px
-				i
-					font-size: 24px
-			span
-				display: none
+	transition: left .3s ease-in-out
+	.btn-menu
+		position: absolute
+		left: calc(100% + 15px)
+		top: 5px
+	&.collapse
+		left: 0
+		&:after
+			content: ''
+			position: absolute
+			top: 0
+			left: 0
+			width: 300vh
+			height: 100%
+			background: rgba(#000, .5)
+			z-index: -1
 	.sidebar-header
 		padding: 10px
+	.sidebar-header,
+	.sidebar-body
+		background: #FBEBF3
 	.sidebar-body
 		color: #D2398C
 		height: 100%
@@ -53,3 +60,7 @@
 			-webkit-font-smoothing: antialiased
 			-moz-osx-font-smoothing: grayscale
 			font-size: 36px
+@media screen and (max-width: 767.97px)
+	.sidebar
+		width: 100px
+		left: -160px

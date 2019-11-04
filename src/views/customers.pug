@@ -35,13 +35,14 @@ block main
 				.table-filter
 					label(for="table-filter") Filter records:
 					input( id="table-filter" type="text")
-			table(style="margin: 10px 0")
+			table.table-parent
 				thead
 					tr
 						th
 							.custom-checkbox
 								input.checkbox(type="checkbox" id="all" value="select-all")
 								label(for="all")
+						//- th
 						th Avatar
 						th Name
 						th Type
@@ -56,6 +57,9 @@ block main
 									.custom-checkbox
 										input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}` )
 										label(for=`id-${i}`)
+									.show-more.plus
+								//- td.show-more
+								//- 	span.plus
 								td(data-label="Avatar")
 									.avatar-thumb
 										img(src="images/avatar.jpg", alt="avatar")
@@ -64,13 +68,16 @@ block main
 								td(data-label="Created by") Nguyen Thanh Loc
 								td(data-label="Created") 19/09/2019
 								td(data-label="Live")
-									span.mdi.mdi-check-circle
-						else 
+									span.check
+						else
 							tr
 								td(data-label="Select")
 									.custom-checkbox
 										input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}`)
 										label(for=`id-${i}`)
+									.show-more.plus
+								//- td.show-more
+								//- 	span.plus
 								td(data-label="Avatar")
 									.avatar-thumb
 										img(src="images/avatar.jpg", alt="avatar")
@@ -79,7 +86,21 @@ block main
 								td(data-label="Created by") Dartmouth
 								td(data-label="Created") 19/09/2019
 								td(data-label="Live")
-									span.mdi.mdi-close-box
+									span.close
+						tr.tr-child
+							//- td
+							td
+							td(colspan="6")
+								table.table-child
+									tr
+										th Address
+										td(data-label="Address") HCM
+									tr
+										th Phone
+										td(data-label="Phone") +1 23 456 789
+									tr
+										th Birthday
+										td(data-label="Birthday") 19/09/1998
 			.row-justify
 				nav.table-pagination
 					a(href="#").prev.disabled Previous

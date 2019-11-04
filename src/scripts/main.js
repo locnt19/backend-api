@@ -18,7 +18,7 @@ $(document).ready(function () {
 	});
 
 	// Open - Close Sidebar
-	$('header .btn-menu').on('click', function () {
+	$('.btn-menu').on('click', function () {
 		$('.sidebar').toggleClass('collapse')
 	});
 
@@ -75,11 +75,11 @@ $(document).ready(function () {
 	});
 	$ListRecordsCustomers.on('click', function () {
 		if ($(this).is(':checked')) {
-			$(this).parents('tr').addClass('selected');
+			$(this).parents('tr').addClass('selected').next('.tr-child').addClass('selected');
 			TotalRecordSelected++;
 		} else {
 			TotalRecordSelected--;
-			$(this).parents('tr').removeClass('selected');
+			$(this).parents('tr').removeClass('selected').next('.tr-child').removeClass('selected');
 			// Untick `SelectAllRecordsCustomers`  when any record of `ListRecordsCustomers` untick
 			if ($SelectAllRecordsCustomers.is(':checked')) {
 				$SelectAllRecordsCustomers.prop('checked', false);
@@ -91,4 +91,18 @@ $(document).ready(function () {
 		};
 		showTotalRecordsSelected();
 	});
+
+	// Toggle `tr-child` in table customers
+	$('.table-parent .show-more').on('click', function () {
+		switch ($(this).hasClass('minus')) {
+			case true:
+				$(this).removeClass('minus').addClass('plus')
+				break;
+			case false:
+				$(this).removeClass('plus').addClass('minus')
+				break;
+		}
+		$(this).parents('tr').toggleClass('more');
+		$(this).parents('tr').next('.tr-child').toggleClass('show');
+	})
 });
