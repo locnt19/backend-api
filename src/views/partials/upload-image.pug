@@ -1,0 +1,19 @@
+.upload-image
+	.box-avatar
+		a(href="", data-fancybox)
+			img.avatar-after-crop(src, alt)
+	button.btn.btn-primary.btn-show-modal Upload
+	button.btn.btn-warning.btn-clear-avatar Clear
+	a.btn-download-avatar(href) Download
+	.modal#modal-upload
+		.modal-title
+			h3 Upload image
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			.preview-before-crop
+			.custom-input-file
+				input#upload-avatar(type='file' accpet="image/*")
+				label(for="upload-avatar") Chọn hình ảnh
+		.modal-footer
+			button.btn.btn-primary.btn-crop Crop
+			button.btn.btn-warning.btn-clear Clear

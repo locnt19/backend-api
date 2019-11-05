@@ -27,37 +27,51 @@ $(document).ready(function () {
 		$(this).siblings('.nav-actions').toggleClass('active')
 	});
 
-	// Close modal
-	$('.modal .modal-title button, .modal .modal-footer button[type=reset]').on('click', function () {
-		$(this).parents('.modal').hide();
-	})
 
-	// ================= CUSTOMERS UI =================
-	// Open modal when click add new customers
+	// Modal listener event
 	var ListEventCustomersModal = [{
-			'idButton': '#new-customer',
-			'idModal': '#modal-new'
+			'buttonCallEvent': '#new-customer',
+			'modal': '#modal-new'
 		},
 		{
-			'idButton': '#delete-customer',
-			'idModal': '#modal-delete'
+			'buttonCallEvent': '#delete-customer',
+			'modal': '#modal-delete'
 		},
 		{
-			'idButton': '#edit-customer',
-			'idModal': '#modal-edit'
-		}
+			'buttonCallEvent': '#edit-customer',
+			'modal': '#modal-edit'
+		},
+		{
+			'buttonCallEvent': '.upload-image .btn-show-modal',
+			'modal': '#modal-upload'
+		},
+		{
+			'buttonCallEvent': '.table-parent .delete',
+			'modal': '#modal-delete'
+		},
 	];
 	for (const item of ListEventCustomersModal) {
-		$(item.idButton).on('click', function () {
-			$(item.idModal).show();
+		// Open modal
+		$(item.buttonCallEvent).on('click', function () {
+			$(item.modal).show();
+		});
+		//Close modal
+		$($(item.modal).find('.modal-title button')).on('click', function () {
+			$(item.modal).hide();
+			clearAllParamInsideUploadModal();
+		})
+		$($(item.modal).find('.modal-footer button[type=reset]')).on('click', function () {
+			$(item.modal).hide();
+			clearAllParamInsideUploadModal();
 		})
 	};
 
+	// ================= CUSTOMERS UI =================
 	// Set background when tick records customers
-	var $SelectAllRecordsCustomers = $('.table-parent thead input:checkbox');
-	var $ListRecordsCustomers = $('.table-parent tbody input:checkbox');
-	var $ShowTotalRecordsSelected = $('.table-row-selected');
-	var TotalRecordSelected = 0;
+	var $SelectAllRecordsCustomers = $('.table-parent thead input:checkbox'),
+		$ListRecordsCustomers = $('.table-parent tbody input:checkbox'),
+		$ShowTotalRecordsSelected = $('.table-row-selected'),
+		TotalRecordSelected = 0;
 
 	function showTotalRecordsSelected() {
 		if (TotalRecordSelected > 0) {
@@ -65,7 +79,7 @@ $(document).ready(function () {
 		} else {
 			$ShowTotalRecordsSelected.hide();
 		}
-	}
+	};
 	$SelectAllRecordsCustomers.on('click', function () {
 		if ($(this).is(':checked')) {
 			$ListRecordsCustomers.each(function () {
@@ -101,6 +115,7 @@ $(document).ready(function () {
 		showTotalRecordsSelected();
 	});
 
+
 	// Toggle `tr-child` in table customers
 	$('.table-parent .show-more').on('click', function () {
 		switch ($(this).hasClass('minus')) {
@@ -113,74 +128,73 @@ $(document).ready(function () {
 		}
 		$(this).parents('tr').toggleClass('more');
 		$(this).parents('tr').next('.tr-child').toggleClass('show');
-	})
+	});
+	// ================= END CUSTOMERS UI =================
 
+
+	// ================= UPLOAD, PREVIEW IMAGE =================
 	// Preview avatar before upload to Server
-
-	// vars
-	var $PreviewAvatar = $('.preview-avatar'),
+	var $PreviewBeforeCrop = $('.preview-before-crop'),
 		$AvatarAfterCrop = $('.avatar-after-crop'),
-		$SetAvatarWitdh = $('.avatar-width'),
-		$SetAvatarHeight = $('.avatar-height'),
-		$SaveAvatarAfterCrop = $('.save-avatar'),
-		$DownloadAvatar = $('.download-avatar'),
-		$UploadAvatar = $('.upload-avatar');
-	
-	let result = document.querySelector('.result'),
-		img_result = document.querySelector('.img-result'),
-		img_w = document.querySelector('.img-w'),
-		img_h = document.querySelector('.img-h'),
-		options = document.querySelector('.options'),
-		save = document.querySelector('.save'),
-		cropped = document.querySelector('.cropped'),
-		dwn = document.querySelector('.download'),
-		upload = document.querySelector('#file-input'),
+		$FancyboxAvatar = $('.box-avatar a'),
+		$CropButton = $('.btn-crop'),
+		$DownloadAvatar = $('.btn-download-avatar'),
+		$UploadAvatar = $('#upload-avatar'),
+		$ClearButton = $('.btn-clear'),
+		$ClearAvatar = $('.btn-clear-avatar'),
 		cropper = '';
 
-	// on change show image with crop options
-	upload.addEventListener('change', (e) => {
+	// On change show image
+	$UploadAvatar.on('change', function (e) {
 		if (e.target.files.length) {
-			// start file reader
+			// Start file reader
 			const reader = new FileReader();
-			reader.onload = (e) => {
+			reader.onload = function (e) {
 				if (e.target.result) {
 					// create new image
 					let img = document.createElement('img');
 					img.id = 'image';
-					img.src = e.target.result
-					// clean result before
-					result.innerHTML = '';
-					// append new image
-					result.appendChild(img);
-					// show save btn and options
-					save.classList.remove('hide');
-					options.classList.remove('hide');
-					// init cropper
-					cropper = new Cropper(img);
+					img.src = e.target.result;
+					// clean $PreviewBeforeCrop before
+					$PreviewBeforeCrop.empty();
+					// Append new image to PriviewBefore
+					$PreviewBeforeCrop.append(img);
+					// Initial ( Cropper Plugin )
+					cropper = new Cropper(img, {
+						aspectRatio: 1 / 1
+					});
 				}
 			};
 			reader.readAsDataURL(e.target.files[0]);
 		}
 	});
-
-	// save on click
-	save.addEventListener('click', (e) => {
-		e.preventDefault();
-		// get result to data uri
-		let imgSrc = cropper.getCroppedCanvas({
-			width: img_w.value // input value
-		}).toDataURL();
-		// remove hide class of img
-		cropped.classList.remove('hide');
-		img_result.classList.remove('hide');
-		// show image cropped
-		cropped.src = imgSrc;
-		dwn.classList.remove('hide');
-		dwn.download = 'imagename.png';
-		dwn.setAttribute('href', imgSrc);
+	// Clear all when click Cancel in Modal
+	function clearAllParamInsideUploadModal() {
+		$UploadAvatar.val('');
+		$PreviewBeforeCrop.empty();
+		$AvatarAfterCrop.attr('src', '');
+	};
+	// Clear avatar after crop
+	$ClearAvatar.on('click', function () {
+		$AvatarAfterCrop.attr('src', '');
 	});
-
-
-
-
+	// Clear preview before crop
+	$ClearButton.on('click', function (e) {
+		e.preventDefault();
+		$UploadAvatar.val('');
+		$PreviewBeforeCrop.empty();
+	});
+	$CropButton.on('click', function (e) {
+		e.preventDefault();
+		// Get result to Data Url
+		let imgSrc = cropper.getCroppedCanvas().toDataURL();
+		$AvatarAfterCrop.attr('src', imgSrc);
+		$DownloadAvatar.attr('download', 'avatar.png');
+		$DownloadAvatar.attr('href', imgSrc);
+		$FancyboxAvatar.attr('href', imgSrc);
+		$PreviewBeforeCrop.empty();
+		alert("Crop successful");
+		$('#modal-upload').hide();
+	})
+	// ================= END UPLOAD, PREVIEW IMAGE =================
 });
