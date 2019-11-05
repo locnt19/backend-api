@@ -30,15 +30,15 @@ $(document).ready(function () {
 
 	// Modal listener event
 	var ListEventCustomersModal = [{
-			'buttonCallEvent': '#new-customer',
+			'buttonCallEvent': '#btn-new',
 			'modal': '#modal-new'
 		},
 		{
-			'buttonCallEvent': '#delete-customer',
+			'buttonCallEvent': '#btn-delete',
 			'modal': '#modal-delete'
 		},
 		{
-			'buttonCallEvent': '#edit-customer',
+			'buttonCallEvent': '#btn-edit',
 			'modal': '#modal-edit'
 		},
 		{
@@ -52,7 +52,8 @@ $(document).ready(function () {
 	];
 	for (const item of ListEventCustomersModal) {
 		// Open modal
-		$(item.buttonCallEvent).on('click', function () {
+		$(item.buttonCallEvent).on('click', function (e) {
+			e.preventDefault();
 			$(item.modal).show();
 		});
 		//Close modal
@@ -168,6 +169,18 @@ $(document).ready(function () {
 			reader.readAsDataURL(e.target.files[0]);
 		}
 	});
+	// PreventDefault all button in .upload-image
+	$('.upload-image button').on('click', function (e) { 
+		e.preventDefault();
+		console.log($('.upload-image a').attr('href'));
+		
+	});
+	$('.upload-image a').on('click', function (e) {
+		if ($(this).attr('href') == '') {
+			e.preventDefault();
+		}
+	});
+	
 	// Clear all when click Cancel in Modal
 	function clearAllParamInsideUploadModal() {
 		$UploadAvatar.val('');
