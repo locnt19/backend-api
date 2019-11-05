@@ -1,0 +1,26 @@
+doctype html
+html
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="shortcut icon" href="/images/favicon.png")
+		link(rel='stylesheet' href='/stylesheets/libs.min.css')
+		link(rel='stylesheet' href='/stylesheets/main.min.css')
+		title= title
+	body
+		section.login
+			form(method="post")#form-login
+				h1 login
+				label(for="username") Username
+				.group
+					input(type="text")#username
+					label(for="username").mdi.mdi-account-outline
+				label(for="password") Password
+				.group
+					input(type="password")#password
+					label(for="password").mdi.mdi-lock-outline
+				a(href="#") Forgot password?
+				button.btn(type="submit") login
+		script(src="/javascripts/libs.min.js")
+		script(src="/javascripts/main.min.js")

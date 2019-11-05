@@ -1,0 +1,82 @@
+.login
+	width: 100vw
+	height: 100vh
+	position: relative
+	background-color:#556
+	background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+	linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+	linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+	linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+	linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a),
+	linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a)
+	background-size: 80px 140px
+	background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px
+	form
+		width: 500px
+		padding: 60px 30px
+		background: #fff
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		font-weight: 600
+		border-radius: 10px
+		box-shadow: 0 0 10px 0 rgba(0, 0, 0, .3)
+		a
+			float: right
+	h1
+		text-align: center
+		font-size: 70px
+		font-weight: 900
+		margin-bottom: 30px
+	label
+		display: block
+		// margin-bottom: 10px
+	input, button
+		font-size: 18px
+		font-family: 'Source Sans Pro', sans-serif
+	#username,
+	#password
+		font-weight: 600
+		width: 100%
+		padding: 10px 15px
+		padding-left: 50px
+		border: none
+		outline: none
+		box-shadow: 0 1px 0 0 #ccc
+		&:focus
+			box-shadow: 0 2px 0 0 #707070
+			+ label
+					color: #707070
+	.group
+		position: relative
+		margin-bottom: 20px
+		label
+			color: #ccc
+			font-size: 24px
+			margin: 0
+			position: absolute
+			top: 50%
+			left: 10px
+			transform: translateY(-50%)
+	button
+		width: 100%
+		font-weight: 700
+		margin-top: 20px
+		text-transform: uppercase
+		border-radius: 99px
+		padding: 15px
+		border: none
+		background-image: linear-gradient(45deg, #ee9ca7 0%, #ffdde1 100%)
+@media (max-width: 575.97px)
+	.login
+		form
+			padding: 30px
+			width: 300px
+			a
+				margin-top: -10px
+		h1
+			margin-bottom: 15px
+			font-size: 50px
+		input, button
+			font-size: 16px

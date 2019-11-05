@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 // INCLUDE ROUTES BEFORE INITIALIZING
 var indexRouter = require('./routes/index');
+var loginRouter = require('./routes/login');
 var customersRouter = require('./routes/customers');
 
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // INITIALIZE ROUTES
 app.use('/', indexRouter);
+app.use('/login', loginRouter);
 app.use('/customers', customersRouter);
 
 
