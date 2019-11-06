@@ -1,53 +1,108 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const session = require('express-session');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const multer = require('multer');
+const dotenv = require('dotenv');
+
+const upload = multer({
+  dest: path.join(__dirname, 'uploads')
+});
 
 
-// INCLUDE ROUTES BEFORE INITIALIZING
-var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
-var customersRouter = require('./routes/customers');
-var accountsRouter = require('./routes/accounts');
+/**
+ * Load environment variables from .env file, where API keys and passwords are configured.
+ */
+dotenv.config({
+  path: '.env'
+});
 
 
-var app = express();
+/**
+ * Controllers (route handlers).
+ */
+const homeController = require('./controllers/home');
+const accountController = require('./controllers/accounts');
+const customerController = require('./controllers/customers');
 
 
-// view engine setup
+/**
+ * Create Express server.
+ */
+const app = express();
+
+
+/**
+ * Connect to MongoDB.
+ */
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
+mongoose.connect(process.env.MONGODB_URI);
+// When the connection is connected
+mongoose.connection.on('connected', function (err) {
+  console.log('Mongoose default connection open to ' + process.env.MONGODB_URI);
+});
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {
+  console.log('Mongoose default connection disconnected');
+});
+// If the connection throws an error
+mongoose.connection.on('error', function (err) {
+  console.error(err);
+  console.log('MongoDB connection error. Please make sure MongoDB is running.');
+  process.exit();
+});
+process.on('SIGINT', function () {
+  mongoose.connection.close(function () {
+    console.log('App terminated, closing mongo connections');
+    process.exit(0);
+  });
+});
+
+
+/**
+ * Express configuration.
+ */
 app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'pug');
-
-
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// INITIALIZE ROUTES
-app.use('/', indexRouter);
-app.use('/login', loginRouter);
-app.use('/customers', customersRouter);
-app.use('/accounts', accountsRouter);
+/**
+ * Primary app routes.
+ */
+app.get('/', homeController.getDashboard);
+app.get('/login', accountController.getLogin);
+app.get('/customers', customerController.getCustomers);
+app.get('/accounts', accountController.getAccounts);
 
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+// Catch 404 and forward to error handler
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+// Error handler
+app.use(function (err, req, res, next) {
+  // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
 
-  // render the error page
+  // Render the error page
   res.status(err.status || 500);
   res.render('error');
 });
