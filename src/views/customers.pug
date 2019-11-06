@@ -16,9 +16,9 @@ block main
 			.dropdown
 				button.btn.btn-dropdown Actions
 				.dropdown-content
-					a(href="#").mdi.mdi-pencil.edit-bg#edit-customer Edit customer
-					a(href="#").mdi.mdi-delete.delete-bg#delete-customer Delete customer
-			button.btn.btn-primary#new-customer New customer
+					a(href="#").mdi.mdi-pencil.edit-bg#btn-edit Edit customer
+					a(href="#").mdi.mdi-delete.delete-bg#btn-delete Delete customer
+			button.btn.btn-primary#btn-new New customer
 		.table-wrapper(style="margin-top: 15px")
 			.row-justify
 				.table-showing
@@ -125,6 +125,12 @@ block main
 				label(for="new-name") Name
 				input(type="text" id="new-name")
 			.form-control
+				label(for="new-address") Address
+				input(type="text" id="new-address")
+			.form-control
+				label(for="new-phone") Phone
+				input(type="text" id="new-phone")
+			.form-control
 				label(for="new-type") Type
 				select(id="new-type")
 					option(value="-1") Please choose...
@@ -132,6 +138,9 @@ block main
 					option(value="1") Silver
 					option(value="2") Gold
 					option(value="3") Diamond
+			.form-control
+				label(for="new-date") Birthday
+				input(type="text" id="new-date").datepicker
 		.modal-footer
 			button(type="submit").btn.btn-primary Save
 			button(type="reset") Cancel

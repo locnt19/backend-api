@@ -46,8 +46,8 @@ $(document).ready(function () {
 			'modal': '#modal-upload'
 		},
 		{
-			'buttonCallEvent': '.table-parent .delete',
-			'modal': '#modal-delete'
+			'buttonCallEvent': '.table-parent .btn-edit-more',
+			'modal': '#modal-edit'
 		},
 	];
 	for (const item of ListEventCustomersModal) {
@@ -66,6 +66,23 @@ $(document).ready(function () {
 			clearAllParamInsideUploadModal();
 		})
 	};
+
+	// Random password
+	function randomString(length) {
+		var result = '';
+		var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		var charactersLength = characters.length;
+		for (var i = 0; i < length; i++) {
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		return result;
+	}
+	$('.random-password').on('click', function (e) {
+		e.preventDefault();
+		$('#edit-password').val(randomString(10));
+	});
+
+
 
 	// ================= CUSTOMERS UI =================
 	// Set background when tick records customers
@@ -170,17 +187,17 @@ $(document).ready(function () {
 		}
 	});
 	// PreventDefault all button in .upload-image
-	$('.upload-image button').on('click', function (e) { 
+	$('.upload-image button').on('click', function (e) {
 		e.preventDefault();
 		console.log($('.upload-image a').attr('href'));
-		
+
 	});
 	$('.upload-image a').on('click', function (e) {
 		if ($(this).attr('href') == '') {
 			e.preventDefault();
 		}
 	});
-	
+
 	// Clear all when click Cancel in Modal
 	function clearAllParamInsideUploadModal() {
 		$UploadAvatar.val('');
@@ -189,7 +206,8 @@ $(document).ready(function () {
 	};
 	// Clear avatar after crop
 	$ClearAvatar.on('click', function () {
-		$AvatarAfterCrop.attr('src', '');
+		clearAllParamInsideUploadModal();
+		$DownloadAvatar.attr('href', '');
 	});
 	// Clear preview before crop
 	$ClearButton.on('click', function (e) {
@@ -205,6 +223,7 @@ $(document).ready(function () {
 		$DownloadAvatar.attr('download', 'avatar.png');
 		$DownloadAvatar.attr('href', imgSrc);
 		$FancyboxAvatar.attr('href', imgSrc);
+		$UploadAvatar.val('');
 		$PreviewBeforeCrop.empty();
 		alert("Crop successful");
 		$('#modal-upload').hide();

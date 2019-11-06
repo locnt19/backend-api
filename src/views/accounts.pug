@@ -1,0 +1,153 @@
+extends layout
+
+block main
+	.customers-wrapper
+		h1.title Account
+		nav.nav-customers
+			li
+				a(href="#") All account
+			li
+				a(href="#") Deleted account
+		.row-justify(style="margin-top: 15px")
+			.dropdown
+				button.btn.btn-dropdown Actions
+				.dropdown-content
+					a(href="#").mdi.mdi-delete.delete-bg#btn-delete Delete account
+			button.btn.btn-primary#btn-new New account
+		.table-wrapper(style="margin-top: 15px")
+			.row-justify
+				.table-showing
+					span Showing 
+					span 1
+					span  to 
+					span 10
+					span  of 
+					span 55
+					span  items
+				.table-row-selected
+					span 10
+					span  records selected
+				.table-filter
+					label(for="table-filter") Filter records:
+					input( id="table-filter" type="text")
+			table.table-parent
+				thead
+					tr
+						th
+							.custom-checkbox
+								input.checkbox(type="checkbox" id="all" value="select-all")
+								label(for="all")
+						th Username
+						th Name
+						th Type
+						th Created by
+						th Created
+						th Status
+						th
+				tbody
+					-for( var i = 0; i < 20; i++)
+						tr
+							td(data-label="Select")
+								.custom-checkbox
+									input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}` )
+									label(for=`id-${i}`)
+							td(data-label="username") locdeptraithanhlichvodichkhapvutru
+							td(data-label="Name")
+								a(href="#") Nguyen Thanh Loc
+							td(data-label="Type") Manager
+							td(data-label="Created by")
+								a(href="#") Nguyen Thanh Loc
+							td(data-label="Created") 19/09/2019
+							td(data-label="Status")
+								span.check
+							td 
+								.btn-edit-more Reset password
+			.row-justify
+				nav.table-pagination
+					a(href="#").prev.disabled Previous
+					a(href="#") 1
+					a(href="#") 2
+					a(href="#") 3
+					a(href="#").next Next
+				.table-show-more
+					label Show
+						select(name="display-number")
+							option(value="10") 10
+							option(value="20") 20
+							option(value="50") 50
+							option(value="100") 100
+							option(value="all") All
+						| entries
+
+
+	//- =============== MODAL ===============
+	form.modal#modal-new
+		.modal-title
+			h3 New Account
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			.form-control
+				label(for="new-username") Username
+				input(type="text" id="new-username")
+			.form-control
+				label(for="new-password") Password
+				input(type="password" id="new-password")
+			.form-control
+				label(for="new-name") Customer name
+				select(id="new-name")
+					option(value="-2") Please choose...
+					option(value="-1") None
+					option(value="0") Nguyen Thanh Loc
+					option(value="1") Loc Thanh
+					option(value="2") Wushu
+					option(value="3") Kaneki
+		.modal-footer
+			button(type="submit").btn.btn-primary Save
+			button(type="reset") Cancel
+	form.modal.modal-warning#modal-delete
+		.modal-title
+			h3 Delete Account
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			p Delete the account will:
+			ul
+				li
+					p
+						strong Delete all data
+						span  relating to the account
+				li
+					p
+						strong Delete all files
+						span  attached to the account
+				li
+					p
+						strong Delete all notes
+						span  attached to the account
+			.tick
+				.custom-checkbox
+					input.checkbox(type="checkbox" id="accept-delete")
+					label(for="accept-delete")
+				label(for="accept-delete") I understand this action cannot be undone.
+		.modal-footer
+			button(type="submit").btn.btn-warning Delete account
+			button(type="reset") Cancel
+	form.modal#modal-edit
+		.modal-title
+			h3 Reset Password
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			.form-control
+				label(for="edit-name") Name
+				input(type="text" id="edit-name" value="Nguyen Thanh Loc" disabled)
+			.form-control
+				label(for="edit-username") Username
+				input(type="text" id="edit-username" value="locdeptraithanhlichvodichkhapvutru" disabled)
+			.form-control
+				label(for="edit-password") Password
+				input(type="text" id="edit-password")
+			.form-control
+				label
+				button.random-password.btn.btn-warning Random password
+		.modal-footer
+			button(type="submit").btn.btn-primary Save
+			button(type="reset") Cancel
