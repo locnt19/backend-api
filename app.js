@@ -7,8 +7,12 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const multer = require('multer');
+const chalk = require('chalk');
 const dotenv = require('dotenv');
+const MongoStore = require('connect-mongo')(session);
+const LocalStrategy = require('passport-local').Strategy;
 
+const Account = require('./models/account');
 const upload = multer({
   dest: path.join(__dirname, 'uploads')
 });
@@ -46,11 +50,11 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGODB_URI);
 // When the connection is connected
 mongoose.connection.on('connected', function (err) {
-  console.log('Mongoose default connection open to ' + process.env.MONGODB_URI);
+  console.log(chalk.green('✓ Mongoose default connection open to', process.env.MONGODB_URI));
 });
 // When the connection is disconnected
 mongoose.connection.on('disconnected', function () {
-  console.log('Mongoose default connection disconnected');
+  console.log(chalk.yellow('Mongoose disconnected'));
 });
 // If the connection throws an error
 mongoose.connection.on('error', function (err) {
@@ -60,7 +64,7 @@ mongoose.connection.on('error', function (err) {
 });
 process.on('SIGINT', function () {
   mongoose.connection.close(function () {
-    console.log('App terminated, closing mongo connections');
+    console.log(chalk.red('✗ App terminated, closing mongo connections'));
     process.exit(0);
   });
 });
@@ -77,7 +81,29 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET,
+  cookie: {
+    maxAge: 3600000
+  }, // One hours in milliseconds
+  store: new MongoStore({
+    url: process.env.MONGODB_URI,
+    autoReconnect: true,
+  })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+/**
+ * Passport configuration.
+ */
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 
 /**
@@ -85,6 +111,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 app.get('/', homeController.getDashboard);
 app.get('/login', accountController.getLogin);
+app.post('/login', accountController.postLogin);
 app.get('/customers', customerController.getCustomers);
 app.get('/accounts', accountController.getAccounts);
 
@@ -107,5 +134,41 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
+// ======================================== TEST SO SANH USERNAME VA PASSWORD
+// const Account = require('./models/account');
+
+// const testAccount = new Account({
+//   username: 'root',
+//   password: 'root',
+// })
+// testAccount.save(function (err) {
+//   if (err) throw err;
+// })
+
+// // fetch user and test password verification
+// Account.findOne({
+//   username: 'root'
+// }, function (err, user) {
+//   if (err) throw err;
+//   console.log(('username: root'));
+
+//   // test a matching password
+//   user.comparePassword('root', function (err, isMatch) {
+//     if (err) throw err;
+//     console.log('Password(root):', isMatch); // -> Password123: true
+//   });
+
+//   // test a failing password
+//   user.comparePassword('123Password', function (err, isMatch) {
+//     if (err) throw err;
+//     console.log('123Password:', isMatch); // -> 123Password: false
+//   });
+// });
+
+// // ======================================== TEST XAC THUC BANG PLUGIN PASSPORT.JS
+// const LocalStrategy = require('passport-local').Strategy;
+// passport.use(new LocalStrategy(Account.authenticate()));
+// passport.serializeUser(Account.serializeUser());
+// passport.deserializeUser(Account.deserializeUser());
 
 module.exports = app;
