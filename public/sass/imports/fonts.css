@@ -1,0 +1,42 @@
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../webfonts/SourceSansPro-ExtraLight.eot?#iefix') format('embedded-opentype'), url('../webfonts/SourceSansPro-ExtraLight.woff') format('woff'), url('../webfonts/SourceSansPro-ExtraLight.ttf') format('truetype'), url('../webfonts/SourceSansPro-ExtraLight.svg#SourceSansPro-ExtraLight') format('svg');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../webfonts/SourceSansPro-Light.eot?#iefix') format('embedded-opentype'), url('../webfonts/SourceSansPro-Light.woff') format('woff'), url('../webfonts/SourceSansPro-Light.ttf') format('truetype'), url('../webfonts/SourceSansPro-Light.svg#SourceSansPro-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../webfonts/SourceSansPro-Regular.eot?#iefix') format('embedded-opentype'),  url('../webfonts/SourceSansPro-Regular.woff') format('woff'), url('../webfonts/SourceSansPro-Regular.ttf')  format('truetype'), url('../webfonts/SourceSansPro-Regular.svg#SourceSansPro-Regular') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../webfonts/SourceSansPro-SemiBold.eot?#iefix') format('embedded-opentype'),  url('../webfonts/SourceSansPro-SemiBold.woff') format('woff'), url('../webfonts/SourceSansPro-SemiBold.ttf')  format('truetype'), url('../webfonts/SourceSansPro-SemiBold.svg#SourceSansPro-SemiBold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../webfonts/SourceSansPro-Bold.eot?#iefix') format('embedded-opentype'),  url('../webfonts/SourceSansPro-Bold.woff') format('woff'), url('..web/fonts/SourceSansPro-Bold.ttf')  format('truetype'), url('../webfonts/SourceSansPro-Bold.svg#SourceSansPro-Bold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../webfonts/SourceSansPro-Black.eot?#iefix') format('embedded-opentype'),  url('../webfonts/SourceSansPro-Black.woff') format('woff'), url('../webfonts/SourceSansPro-Black.ttf')  format('truetype'), url('../webfonts/SourceSansPro-Black.svg#SourceSansPro-Black') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}

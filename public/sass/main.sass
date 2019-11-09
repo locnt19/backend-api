@@ -1,0 +1,310 @@
+$color-1: #E5E5E5
+$color-primary: #007bff
+$color-warning: #BC4539
+$color-outline: #FFBF47
+
+body
+	font-family: 'Source Sans Pro', sans-serif
+	font-weight: 400
+	font-size: 16px
+	color: #707070
+a
+	color: inherit
+	text-decoration: none
+li
+	list-style: none
+.body-wrapper
+	position: relative
+	display: flex
+.main-wrapper
+	width: 100%
+.logo
+	img
+		width: 100%
+// ====== GOLBAL STYLE ======
+.row-center,
+.row-justify,
+.row-right,
+.row-left
+	display: flex
+	align-items: center
+	flex-wrap: wrap
+.row-justify
+	justify-content: space-between
+.row-right
+	justify-content: flex-end
+.row-center
+	justify-content: center
+
+.form-control
+	margin-top: 15px
+	>input,
+	>select
+		flex: 0 0 75%
+		max-width: 75%
+		border: 1px solid #ccc
+		border-radius: 4px
+		padding: 8px 15px
+		&:focus
+			border-color: #000
+			outline: #ffbf47 solid 3px
+			outline-offset: 0
+	&:first-child
+		margin-top: 0
+
+.avatar-thumb
+	margin: 0 auto
+	width: 64px
+	height: 64px
+	overflow: hidden
+	border-radius: 4px
+	padding: 5px
+	background: #fff
+	border: 1px solid #ccc
+	img
+			width: 100%
+			height: 100%
+			object-fit: cover
+
+.custom-input-file
+	display: flex
+	align-items: center
+	position: relative
+	input
+		position: absolute
+		outline: none
+		left: 45px
+		+ label
+			order: -1
+			z-index: 1
+			padding: 4px 15px
+			line-height: 1
+			white-space: nowrap
+			border: 1px dashed #007bff
+			border-radius: 4px
+			background: #f1f1f1
+			display: inline-block
+			color: #707070
+			font-size: 16px
+			cursor: pointer
+			*
+				pointer-events: none
+		&:focus + label,
+		+ label:hover
+			color: #fff
+			background: #007bff
+		&::-webkit-file-upload-button
+			visibility: hidden
+
+.btn
+	display: inline-block
+	font-weight: 400
+	text-align: center
+	vertical-align: middle
+	user-select: none
+	font-size: 16px
+	color: #fff
+	border: 1px solid transparent
+	padding: 5px 10px
+	outline: none
+	line-height: 1.5
+	cursor: pointer
+	border-radius: 4px
+.btn-menu
+	background: #fff
+	border: 1px solid #ccc
+	border-radius: 4px
+	font-size: 24px
+	color: #707070
+	cursor: pointer
+.btn-primary
+	background-color: #007bff
+  border-color: #007bff
+	&:hover
+		background-color: #0069d9
+		border-color: #0062cc
+.btn-warning
+	background-color: #BC4539
+	border-color: #BC4539
+	&:disabled
+		background-color: lighten(#BC4539, 20)
+		border-color: lighten(#BC4539, 20)
+.btn-dropdown
+	padding-right: 5px
+	border-color: #6c757d
+	background: #6c757d
+	&:after
+		margin-left: 5px
+		content: '\F35D'
+		display: inline-block
+		font-family: 'Material Design Icons'
+		font-size: inherit
+		text-rendering: auto
+		line-height: 1
+		-webkit-font-smoothing: antialiased
+		-moz-osx-font-smoothing: grayscale
+	&:hover
+		background: #5a6268
+		border-color: #545b62
+.dropdown
+	position: relative
+	&:hover
+		.dropdown-content
+			opacity: 1
+			visibility: visible
+	.dropdown-content
+		background: #fff
+		border: 1px solid #E5E5E5
+		border-radius: 4px
+		position: absolute
+		visibility: hidden
+		white-space: nowrap
+		opacity: 0
+		transition: all .15s
+		z-index: 1
+		a
+			display: block
+			padding: 8px 15px
+			margin: 5px 0
+			&:before
+				margin-right: 5px
+			&:hover
+				color: #fff
+				&.edit-bg
+					background: #ffc107
+				&.delete-bg
+					background: #BC4539
+.custom-checkbox
+	display: inline-block
+	width: 16px
+	height: 16px
+	position: relative
+	font-size: 12px
+	font-weight: 400
+	input
+		&:not(:checked),
+		&:checked
+			display: none
+		&:not(:checked) + label:before,
+		&:checked + label:before
+			content: ''
+			position: absolute
+			top: 0
+			left: 0
+			bottom: 0
+			right: 0
+			background: #fff
+			border-radius: 4px
+			box-shadow: inset 0 0 2px 1px #c8c8c8
+		&:checked + label:before
+			background: #f5a623
+		&:not(:checked) + label:after,
+		&:checked + label:after
+			position: absolute
+			top: 50%
+			left: 50%
+			color: #fff
+			transition: all .2s
+			// icon
+			content: '\F12C'
+			display: inline-block
+			font-family: 'Material Design Icons'
+			text-rendering: auto
+			line-height: 1
+			-webkit-font-smoothing: antialiased
+			-moz-osx-font-smoothing: grayscale
+		&:not(:checked) + label:after
+			opacity: 0
+			transform: scale(0)
+		&:checked + label:before
+			box-shadow: none
+		&:checked + label:after
+			opacity: 1
+			transform: translate(-50%, -50%) scale(1)
+.modal
+	display: none
+	width: 400px
+	background: #fff
+	box-shadow: 0 0 5px 1px rgba(#000, .3)
+	position: fixed
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	z-index: 50
+	&:after
+		content: ''
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		width: 100vw
+		height: 100vh
+		display: block
+		background: rgba(#000, .5)
+		z-index: -1
+	.modal-title,
+	.form-control
+		display: flex
+		align-items: center
+		justify-content: space-between
+	.modal-title,
+	.modal-body,
+	.modal-footer
+		padding: 10px 15px
+		background: #fff
+	.modal-title
+		font-size: 20px
+		border-bottom: 1px solid #ccc
+		h3
+			font-weight: 700
+		button
+			color: inherit
+			flex: 0 0 30px
+			max-width: 30px
+			height: 30px
+			font-size: 20px
+			padding: 0
+	button[type="reset"]
+		border: none
+		cursor: pointer
+		background: none
+	.upload-image
+		flex: 0 0 75%
+		max-width: 75%
+		text-align: center
+	.modal-body
+		padding: 30px 15px
+		line-height: 1.5
+	.modal-footer
+		border-top: 1px solid #ccc
+	.tick
+		>label
+			user-select: none
+		.custom-checkbox
+			display: inline-block
+			margin-right: 10px
+			position: relative
+			top: 3px
+	ul
+		padding-left: 30px
+		li
+			list-style-type: disc
+.modal-warning
+	.modal-title
+		background: #BC4539
+		color: #fff
+@media (max-width: 767.97px)
+	.modal
+		width: 300px
+		.modal-body
+			padding: 15px
+		.form-control
+			margin-top: 10px
+
+@import header
+@import footer
+@import sidebar
+@import customers
+@import user-action
+@import upload-image
+@import login
