@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    meta(name='csrf-token', content=_csrf)
+    link(rel="shortcut icon" href="/images/favicon.png")
+    link(rel='stylesheet' href='/css/libs.css')
+    link(rel='stylesheet' href='/css/style.css')
+body
+  section.body-wrapper
+    block sidebar
+      include partials/sidebar
+    .main-wrapper
+      block header
+        include partials/header
+      main
+        block main
+      block footer
+        include partials/footer
+  script(src='js/libs.js')
+  script(src='js/main.js')

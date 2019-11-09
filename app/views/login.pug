@@ -1,0 +1,29 @@
+doctype html
+html
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		meta(http-equiv="X-UA-Compatible" content="ie=edge")
+		link(rel="shortcut icon" href="/images/favicon.png")
+		link(rel='stylesheet' href='/css/libs.css')
+		link(rel='stylesheet' href='/css/style.css')
+		title= title
+	body
+		section.login
+			each item in messages
+				.flash= item
+			form(action="/login" method="post")#form-login
+				input(type='hidden', name='_csrf', value=_csrf)
+				h1 login
+				label(for="username") Username
+				.group
+					input(type="text" id="username" name="username" autofocus required)
+					label(for="username").mdi.mdi-account-outline
+				label(for="password") Password
+				.group
+					input(type="password" id="password" name="password" required)
+					label(for="password").mdi.mdi-lock-outline
+				a(href="#") Forgot password?
+				button.btn(type="submit") login
+		script(src="/js/libs.js")
+		script(src="/js/main.js")
