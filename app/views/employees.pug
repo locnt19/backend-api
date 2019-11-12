@@ -1,0 +1,241 @@
+extends layout
+
+block main
+	.mess
+		each item in messages
+			.flash= item
+	.customers-wrapper
+		h1.title Emloyees
+		nav.nav-customers
+			li
+				a(href="#") All Emloyees
+			li
+				a(href="#") Recent Emloyees
+			li
+				a(href="#") Starred Emloyees
+			li
+				a(href="#") My Emloyees
+		.row-justify(style="margin-top: 15px")
+			.dropdown
+				button.btn.btn-dropdown Actions
+				.dropdown-content
+					a(href="#").mdi.mdi-pencil.edit-bg#btn-edit Edit emloyyee
+					a(href="#").mdi.mdi-delete.delete-bg#btn-delete Delete emloyyee
+			button.btn.btn-primary#btn-new New emloyyee
+		.table-wrapper(style="margin-top: 15px")
+			.row-justify
+				.table-showing
+					span Showing 
+					span 1
+					span  to 
+					span 10
+					span  of 
+					span 55
+					span  items
+				.table-row-selected
+					span 10
+					span  records selected
+				.table-filter
+					label(for="table-filter") Filter records:
+					input( id="table-filter" type="text")
+			table.table-parent
+				thead
+					tr
+						th
+							.custom-checkbox
+								input.checkbox(type="checkbox" id="all" value="select-all")
+								label(for="all")
+						th Avatar
+						th Name
+						th Type
+						th Birthday
+						th Address
+						th Seniority
+						th Status
+				tbody
+					-for( var i in employees)
+						tr
+							td(data-label="Select")
+								.custom-checkbox
+									input(type="checkbox" id= employees[i]._id value= employees[i]._id)
+									label(for= employees[i]._id)
+								.show-more.plus
+							td(data-label="Avatar")
+								.avatar-thumb
+									a(href= employees[i].avatar data-fancybox)
+										img(src= employees[i].avatar, alt= employees[i].avatar)
+							td(data-label="Name")= employees[i].name
+							td(data-label="Type")= employees[i].type
+							td(data-label="Birthday")= employees[i].birthday
+							td(data-label="Address")= employees[i].address
+							td(data-label="Seniority")= employees[i].seniority
+							td(data-label="Live")
+								if(employees[i].status)
+									span.check
+								else
+									span.close
+						tr.tr-child
+							td
+							td(colspan="7")
+								table.table-child
+									tr
+										th Pay rate
+										td(data-label="Pay rate")= employees[i].pay_rate
+									tr
+										th Phone
+										td(data-label="Phone")= employees[i].phone
+			.row-justify
+				nav.table-pagination
+					a(href="#").prev.disabled Previous
+					a(href="#") 1
+					a(href="#") 2
+					a(href="#") 3
+					a(href="#").next Next
+				.table-show-more
+					label Show
+						select(name="display-number")
+							option(value="10") 10
+							option(value="20") 20
+							option(value="50") 50
+							option(value="100") 100
+							option(value="all") All
+						| entries
+
+
+	//- =============== MODAL ===============
+	form(method="post" name="new-employee").modal#modal-new
+		.modal-title
+			h3 New Employee
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			.form-control(style="margin: 0")
+				label(for="edit-avatar") Avatar
+				.upload-image
+					.box-avatar
+						a(href="", data-fancybox)
+							img.avatar-after-crop(src, alt)
+					button.btn.btn-primary.btn-show-modal Upload
+					button.btn.btn-warning.btn-clear-avatar Clear
+					.modal#modal-upload
+						.modal-title
+							h3 Upload image
+							button(type="reset").mdi.mdi-close
+						.modal-body
+							.preview-before-crop
+							.custom-input-file
+								input#upload-avatar(type='file' accpet="image/*")
+								label(for="upload-avatar") Chọn hình ảnh
+						.modal-footer
+							button.btn.btn-primary.btn-crop Crop
+							button.btn.btn-warning.btn-clear Clear
+			input#croped(type="hidden", name="avatar")
+			.form-control
+				label(for="name") Name
+				input(type="text" id="name" name="name")
+			.form-control
+				label(for="type") Type
+				select(id="type" name="type")
+					option(value="-1") Please choose...
+					option(value="0") Normal
+					option(value="1") Silver
+					option(value="2") Gold
+					option(value="3") Diamond
+			.form-control
+				label(for="birthday") Birthday
+				input(type="text" id="birthday" name="birthday").datepicker
+			.form-control
+				label(for="address") Address
+				input(type="text" id="address" name="address")
+			.form-control
+				label(for="phone") Phone
+				input(type="text" id="phone" name="phone")
+			.form-control
+				label(for="pay_rate") Pay rate
+				input(type="text" id="pay_rate" name="pay_rate")
+			.form-control
+				label(for="seniority") Seniority
+				input(type="text" id="seniority" name="seniority").datepicker
+		.modal-footer
+			button(type="submit").btn.btn-primary Save
+			button(type="reset") Cancel
+	form(method="post" name="delete-employee").modal.modal-warning#modal-delete
+		.modal-title
+			h3 Delete Customer
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			p Delete the customer will:
+			ul
+				li
+					p
+						strong Delete all data
+						span  relating to the customer
+				li
+					p
+						strong Delete all files
+						span  attached to the customer
+				li
+					p
+						strong Delete all notes
+						span  attached to the customer
+			.tick
+				.custom-checkbox
+					input.checkbox(type="checkbox" id="accept-delete")
+					label(for="accept-delete")
+				label(for="accept-delete") I understand this action cannot be undone.
+		.modal-footer
+			button(type="submit").btn.btn-warning Delete Customer
+			button(type="reset") Cancel
+	form(action="/employee/:id/edit" method="post" name="edit-employee").modal#modal-edit
+		.modal-title
+			h3 Edit Customer
+			button(type="reset").mdi.mdi-close
+		.modal-body
+			//- .form-control(style="margin: 0")
+				label(for="edit-avatar") Avatar
+				.upload-image
+					.box-avatar
+						a(href="", data-fancybox)
+							img.avatar-after-crop(src, alt)
+					button.btn.btn-primary.btn-show-modal Upload
+					button.btn.btn-warning.btn-clear-avatar Clear
+					.modal#modal-upload
+						.modal-title
+							h3 Upload image
+							button(type="reset").mdi.mdi-close
+						.modal-body
+							.preview-before-crop
+							.custom-input-file
+								input#upload-avatar(type='file' accpet="image/*")
+								label(for="upload-avatar") Chọn hình ảnh
+						.modal-footer
+							button.btn.btn-primary.btn-crop Crop
+							button.btn.btn-warning.btn-clear Clear
+			.form-control
+				label(for="edit-name") Name
+				input(type="text" id="edit-name" name="name")
+			.form-control
+				label(for="edit-type") Type
+				select(id="edit-type" name="type")
+					option(value="-1") Please choose...
+					option(value="0") Normal
+					option(value="1") Silver
+					option(value="2") Gold
+					option(value="3") Diamond
+			.form-control
+				label(for="edit-birthday") Birthday
+				input(type="text" id="edit-birthday" name="birthday").datepicker
+			.form-control
+				label(for="edit-address") Address
+				input(type="text" id="edit-address" name="address")
+			.form-control
+				label(for="edit-phone") Phone
+				input(type="text" id="edit-phone" name="phone")
+			.form-control
+				label(for="edit-pay_rate") Pay rate
+				input(type="text" id="edit-pay_rate" name="pay_rate")
+			.form-control
+				label(for="edit-seniority") Seniority
+				input(type="text" id="edit-seniority" name="seniority").datepicker
+		.modal-footer
+			button(type="submit").btn.btn-primary Save
+			button(type="reset") Cancel

@@ -7,6 +7,6 @@ module.exports = function () {
 	mongoose.set('useUnifiedTopology', true);
 	var db = mongoose.connect(process.env.MONGODB_URI);
 	require('../app/models/user.server.model');
-
+	require('../app/models/employee.server.model');
 	return db;
 };

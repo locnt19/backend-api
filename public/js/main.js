@@ -189,8 +189,6 @@ $(document).ready(function () {
 	// PreventDefault all button in .upload-image
 	$('.upload-image button').on('click', function (e) {
 		e.preventDefault();
-		console.log($('.upload-image a').attr('href'));
-
 	});
 	$('.upload-image a').on('click', function (e) {
 		if ($(this).attr('href') == '') {
@@ -224,6 +222,7 @@ $(document).ready(function () {
 		$DownloadAvatar.attr('href', imgSrc);
 		$FancyboxAvatar.attr('href', imgSrc);
 		$UploadAvatar.val('');
+		$('#croped').attr('value', imgSrc)
 		$PreviewBeforeCrop.empty();
 		alert("Crop successful");
 		$('#modal-upload').hide();

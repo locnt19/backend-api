@@ -45,15 +45,16 @@ block main
 						th Status
 						th
 				tbody
-					-for( var i = 0; i < 20; i++)
+					//- -for( var i = 0; i < 20; i++)
+					-for(var user in users)
 						tr
 							td(data-label="Select")
 								.custom-checkbox
-									input.checkbox(type="checkbox" id=`id-${i}` value=`id-${i}` )
+									input.checkbox(type="checkbox" id='id-' + users[user]._id value='id-' + users[user]._id)
 									label(for=`id-${i}`)
-							td(data-label="username") locdeptraithanhlichvodichkhapvutru
-							td(data-label="Name")
-								a(href="#") Nguyen Thanh Loc
+							td(data-label="username")= users[user].username
+							td(data-label="password")
+								a(href="#") #{users[user].password}
 							td(data-label="Type") Manager
 							td(data-label="Created by")
 								a(href="#") Nguyen Thanh Loc
