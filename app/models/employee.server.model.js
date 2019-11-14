@@ -22,4 +22,4 @@ var EmployeeSchema = new Schema({
 	timestamps: true
 });
 
-mongoose.model('Employee', EmployeeSchema);
+mongoose.model('Employee', EmployeeSchema, 'employees');

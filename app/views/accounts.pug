@@ -1,6 +1,9 @@
 extends layout
 
 block main
+	.messages
+		each item in messages
+			.flash= item
 	.customers-wrapper
 		h1.title Account
 		nav.nav-customers
@@ -38,27 +41,29 @@ block main
 								input.checkbox(type="checkbox" id="all" value="select-all")
 								label(for="all")
 						th Username
-						th Name
-						th Type
-						th Created by
+						th Owner
+						th Permission
 						th Created
+						th Last updated
 						th Status
 						th
 				tbody
-					//- -for( var i = 0; i < 20; i++)
-					-for(var user in users)
+					-for(var i in accounts)
 						tr
 							td(data-label="Select")
 								.custom-checkbox
-									input.checkbox(type="checkbox" id='id-' + users[user]._id value='id-' + users[user]._id)
-									label(for=`id-${i}`)
-							td(data-label="username")= users[user].username
-							td(data-label="password")
-								a(href="#") #{users[user].password}
-							td(data-label="Type") Manager
-							td(data-label="Created by")
-								a(href="#") Nguyen Thanh Loc
-							td(data-label="Created") 19/09/2019
+									input.checkbox(type="checkbox" id= accounts[i]._id value= accounts[i]._id)
+									label(for= accounts[i]._id)
+							td(data-label="Username")= accounts[i].username
+							td(data-label="Owner")
+								a(href="/employee/" + accounts[i].owner._id)= accounts[i].owner.name
+							td(data-label="Permission")= accounts[i].permission
+							td(data-label="Created")
+								p= accounts[i].createdAt.day + "/" + accounts[i].createdAt.month + "/" + accounts[i].createdAt.year
+								p= accounts[i].createdAt.hour + ":" + accounts[i].createdAt.minute + ":" + accounts[i].createdAt.second
+							td(data-label="Last updated")
+								p= accounts[i].updatedAt.day + "/" + accounts[i].updatedAt.month + "/" + accounts[i].updatedAt.year
+								p= accounts[i].updatedAt.hour + ":" + accounts[i].updatedAt.minute + ":" + accounts[i].updatedAt.second
 							td(data-label="Status")
 								span.check
 							td 
@@ -82,26 +87,24 @@ block main
 
 
 	//- =============== MODAL ===============
-	form.modal#modal-new
+	form(method="POST").modal#modal-new
 		.modal-title
 			h3 New Account
 			button(type="reset").mdi.mdi-close
 		.modal-body
 			.form-control
-				label(for="new-username") Username
-				input(type="text" id="new-username")
+				label(for="username") Username
+				input(type="text" id="username" name="username")
 			.form-control
-				label(for="new-password") Password
-				input(type="password" id="new-password")
+				label(for="password") Password
+				input(type="password" id="password" name="password")
 			.form-control
-				label(for="new-name") Customer name
-				select(id="new-name")
-					option(value="-2") Please choose...
-					option(value="-1") None
-					option(value="0") Nguyen Thanh Loc
-					option(value="1") Loc Thanh
-					option(value="2") Wushu
-					option(value="3") Kaneki
+				label(for="owner") Owner
+				input#owner-name( type="hidden" name="owner.name")
+				select(id="owner" name="owner._id")
+					option(value="-1") Please choose...
+					-for(var i in employees)
+							option(value= employees[i]._id)= employees[i].name
 		.modal-footer
 			button(type="submit").btn.btn-primary Save
 			button(type="reset") Cancel

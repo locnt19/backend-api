@@ -228,4 +228,19 @@ $(document).ready(function () {
 		$('#modal-upload').hide();
 	})
 	// ================= END UPLOAD, PREVIEW IMAGE =================
+
+	// SET OWNER-NAME WHEN SELECT OWNER WHERE ACCOUNTS PAGE
+	$('#modal-new #owner').on('change', function () {
+		var
+			ownerName = $(this).siblings('#owner-name'),
+			id = $(this).val(),
+			arr = $(this).find('option');
+		for (let i = 0; i < arr.length; i++) {
+			if ($(arr[i]).val() == id) {
+				ownerName.val($(arr[i]).text());
+				break;
+			}
+		}
+	})
+
 });
