@@ -22,11 +22,16 @@ li
 	img
 		width: 100%
 // ====== GOLBAL STYLE ======
+.row-flex,
 .row-center,
 .row-justify,
 .row-right,
 .row-left
 	display: flex
+.row-center,
+.row-justify,
+.row-right,
+.row-left
 	align-items: center
 	flex-wrap: wrap
 .row-justify
@@ -300,7 +305,35 @@ li
 			padding: 15px
 		.form-control
 			margin-top: 10px
-
+.plus,
+.minus,
+.check,
+.close
+	&:before
+		display: inline-block
+		font-family: 'Material Design Icons'
+		font-size: inherit
+		text-rendering: auto
+		line-height: 1
+		-webkit-font-smoothing: antialiased
+		-moz-osx-font-smoothing: grayscale
+.plus:before
+	content: '\F417'
+.minus:before
+	content: '\F376'
+.check:before
+	content: '\F5E0'
+.close:before
+	content: '\F159'
+.plus,
+.check
+	color: #28a745
+.minus,
+.close
+	color: #dc3545
+.plus,
+.minus
+	cursor: pointer
 @import header
 @import footer
 @import sidebar
@@ -308,3 +341,5 @@ li
 @import user-action
 @import upload-image
 @import login
+@import 404
+@import employee-detail
