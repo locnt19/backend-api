@@ -57,7 +57,14 @@ block main
 							td(data-label="Username")= accounts[i].username
 							td(data-label="Owner")
 								a(href="/employee/" + accounts[i].owner._id)= accounts[i].owner.name
-							td(data-label="Permission")= accounts[i].permission
+							td(data-label="Permission")
+								case accounts[i].permission
+									when 1
+										span Normal
+									when 2
+										span Staff
+									when 3
+										span Admin
 							td(data-label="Created")
 								p= accounts[i].createdAt.day + "/" + accounts[i].createdAt.month + "/" + accounts[i].createdAt.year
 								p= accounts[i].createdAt.hour + ":" + accounts[i].createdAt.minute + ":" + accounts[i].createdAt.second
@@ -65,7 +72,10 @@ block main
 								p= accounts[i].updatedAt.day + "/" + accounts[i].updatedAt.month + "/" + accounts[i].updatedAt.year
 								p= accounts[i].updatedAt.hour + ":" + accounts[i].updatedAt.minute + ":" + accounts[i].updatedAt.second
 							td(data-label="Status")
-								span.check
+								if accounts[i].status
+									span.check
+								else
+									span.close
 							td 
 								.btn-edit-more Reset password
 			.row-justify
@@ -99,10 +109,17 @@ block main
 				label(for="password") Password
 				input(type="password" id="password" name="password")
 			.form-control
+				label(for="permission") Permission
+				select(id="permission" name="permission")
+					option(value="0") Please choose...
+					option(value="1") Normal
+					option(value="2") Staff
+					option(value="3") Admin
+			.form-control
 				label(for="owner") Owner
 				input#owner-name( type="hidden" name="owner.name")
 				select(id="owner" name="owner._id")
-					option(value="-1") Please choose...
+					option(value="0") Please choose...
 					-for(var i in employees)
 							option(value= employees[i]._id)= employees[i].name
 		.modal-footer

@@ -21,7 +21,6 @@ exports.list = function (req, res, next) {
 		if (err) {
 			return next(err);
 		} else {
-			// res.json(users);
 			res.render('employees', {
 				title: 'Manager Employee',
 				user: req.user ? req.user.username : '',
@@ -33,16 +32,22 @@ exports.list = function (req, res, next) {
 };
 
 exports.read = function (req, res) {
-	res.json(req.user);
+	res.render('employee-detail', {
+		title: 'Profile: ' + req.user.name,
+		userDetail: req.user,
+		messages: req.flash('info')
+	});
 };
 
 exports.userByID = function (req, res, next, id) {
-	User.findOne({
+	Employee.findOne({
 			_id: id
 		},
 		function (err, user) {
 			if (err) {
-				return next(err);
+				res.render('404', {
+					title: 'Page not found'
+				});
 			} else {
 				req.user = user;
 				next();
@@ -52,7 +57,7 @@ exports.userByID = function (req, res, next, id) {
 };
 
 exports.update = function (req, res, next) {
-	User.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
+	Employee.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
 		if (err) {
 			return next(err);
 		} else {

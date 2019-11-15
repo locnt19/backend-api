@@ -64,13 +64,14 @@ block main
 								.avatar-thumb
 									a(href= employees[i].avatar data-fancybox)
 										img(src= employees[i].avatar, alt= employees[i].avatar)
-							td(data-label="Name")= employees[i].name
+							td(data-label="Name")
+								a(href="/employee/" + employees[i]._id)= employees[i].name
 							td(data-label="Type")= employees[i].type
 							td(data-label="Birthday")= employees[i].birthday
 							td(data-label="Address")= employees[i].address
 							td(data-label="Seniority")= employees[i].seniority
 							td(data-label="Live")
-								if(employees[i].status)
+								if employees[i].status
 									span.check
 								else
 									span.close

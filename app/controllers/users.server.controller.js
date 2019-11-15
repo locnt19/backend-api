@@ -76,6 +76,7 @@ exports.list = function (req, res, next) {
 			username: "$username",
 			permission: "$permission",
 			owner: "$owner",
+			status: "$status",
 			createdAt: {
 				$dateToParts: {
 					date: "$createdAt",

@@ -1,0 +1,45 @@
+extends layout
+
+block main
+	.messages
+		each item in messages
+			.flash= item
+	.employee-detail
+		.container
+			.row-flex
+				if userDetail
+					.avatar
+						img(src= userDetail.avatar)
+					.detail
+						table
+							tr
+								th Name
+								td= userDetail.name
+							tr
+								th Birthday
+								td= userDetail.birthday
+							tr
+								th Type
+								td= userDetail.type
+							tr
+								th Pay rate
+								td= userDetail.pay_rate
+							tr
+								th Address
+								td= userDetail.address
+							tr
+								th Phone
+								td= userDetail.phone
+							tr
+								th Seniority
+								td= userDetail.seniority
+							tr
+								th Create At
+								td= userDetail.createdAt
+							tr
+								th Status
+								td
+									if userDetail.status
+										span.check
+									else
+										span.close
