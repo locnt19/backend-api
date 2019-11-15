@@ -14,6 +14,8 @@
 /node_modules
 /bower_components
 /public/fonts/*
+/public/js/libs.js
+/public/css/*
 
 # profiling files
 chrome-profiler-events.json
