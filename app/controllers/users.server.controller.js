@@ -1,8 +1,6 @@
 var
-	db = require('mongodb'),
 	User = require('mongoose').model('User'),
-	Employee = require('mongoose').model('Employee'),
-	passport = require('passport');
+	Employee = require('mongoose').model('Employee')
 
 exports.renderLogin = function (req, res, next) {
 	if (!req.user) {
