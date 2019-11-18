@@ -30,24 +30,24 @@ $(document).ready(function () {
 
 	// Modal listener event
 	var ListEventCustomersModal = [{
-			'buttonCallEvent': '#btn-new',
-			'modal': '#modal-new'
+			'buttonCallEvent': '.btn-open-new-modal',
+			'modal': '.new-modal'
 		},
 		{
-			'buttonCallEvent': '#btn-delete',
-			'modal': '#modal-delete'
+			'buttonCallEvent': '.btn-open-delete-modal',
+			'modal': '.delete-modal'
 		},
 		{
-			'buttonCallEvent': '#btn-edit',
-			'modal': '#modal-edit'
+			'buttonCallEvent': '.btn-open-edit-modal',
+			'modal': '.edit-modal'
 		},
 		{
 			'buttonCallEvent': '.upload-image .btn-show-modal',
-			'modal': '#modal-upload'
+			'modal': '.upload-modal'
 		},
 		{
 			'buttonCallEvent': '.table-parent .btn-edit-more',
-			'modal': '#modal-edit'
+			'modal': '.edit-modal'
 		},
 	];
 	for (const item of ListEventCustomersModal) {
@@ -225,14 +225,14 @@ $(document).ready(function () {
 		$('#croped').attr('value', imgSrc)
 		$PreviewBeforeCrop.empty();
 		alert("Crop successful");
-		$('#modal-upload').hide();
+		$('.upload-modal').hide();
 	})
 	// ================= END UPLOAD, PREVIEW IMAGE =================
 
-	// SET OWNER-NAME WHEN SELECT OWNER WHERE ACCOUNTS PAGE
-	$('#modal-new #owner').on('change', function () {
+	// SET OWNER-NAME WHEN SELECT OWNER IN ACCOUNTS PAGE
+	$('.list-owners select').on('change', function () {
 		var
-			ownerName = $(this).siblings('#owner-name'),
+			ownerName = $(this).siblings('input'),
 			id = $(this).val(),
 			arr = $(this).find('option');
 		for (let i = 0; i < arr.length; i++) {
@@ -242,5 +242,23 @@ $(document).ready(function () {
 			}
 		}
 	})
+
+	// GET ID AND USERNAME OF ACCOUNT WHEN CLICK RESET PASSWORD IN ACCOUNT PAGE
+	$('.table-parent .btn-edit-more').on('click', function () {
+		var tr = $(this).parents('tr');
+		var id = tr.find('input:checkbox').val();
+		var ownerName = tr.find('td:nth-child(3) a').text();
+		var userName = tr.find('td:nth-child(2)').text();
+
+		$('#edit-id').val(id);
+		$('#edit-username').val(userName);
+		$('#edit-owner-name').val(ownerName);
+		$('#edit-owner option').each(function () {
+			if ($(this).text() == ownerName) {
+				$(this).attr('selected', 'selected');
+				return false; // break loop
+			}
+		})
+	});
 
 });

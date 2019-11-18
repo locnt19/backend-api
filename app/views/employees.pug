@@ -19,9 +19,9 @@ block main
 			.dropdown
 				button.btn.btn-dropdown Actions
 				.dropdown-content
-					a(href="#").mdi.mdi-pencil.edit-bg#btn-edit Edit emloyyee
-					a(href="#").mdi.mdi-delete.delete-bg#btn-delete Delete emloyyee
-			button.btn.btn-primary#btn-new New emloyyee
+					a(href="#").mdi.mdi-pencil.edit-bg.btn-open-edit-modal Edit emloyyee
+					a(href="#").mdi.mdi-delete.delete-bg.btn-open-delete-modal Delete emloyyee
+			button.btn.btn-primary.btn-open-new-modal New emloyyee
 		.table-wrapper(style="margin-top: 15px")
 			.row-justify
 				.table-showing
@@ -104,7 +104,7 @@ block main
 
 
 	//- =============== MODAL ===============
-	form(method="post" name="new-employee").modal#modal-new
+	form(method="post" name="new-employee").modal.new-modal
 		.modal-title
 			h3 New Employee
 			button(type="reset").mdi.mdi-close
@@ -117,7 +117,7 @@ block main
 							img.avatar-after-crop(src, alt)
 					button.btn.btn-primary.btn-show-modal Upload
 					button.btn.btn-warning.btn-clear-avatar Clear
-					.modal#modal-upload
+					.modal.upload-modal
 						.modal-title
 							h3 Upload image
 							button(type="reset").mdi.mdi-close
@@ -159,7 +159,7 @@ block main
 		.modal-footer
 			button(type="submit").btn.btn-primary Save
 			button(type="reset") Cancel
-	form(method="post" name="delete-employee").modal.modal-warning#modal-delete
+	form(method="post" name="delete-employee").modal.modal-warning.delete-modal
 		.modal-title
 			h3 Delete Customer
 			button(type="reset").mdi.mdi-close
@@ -186,7 +186,7 @@ block main
 		.modal-footer
 			button(type="submit").btn.btn-warning Delete Customer
 			button(type="reset") Cancel
-	form(action="/employee/:id/edit" method="post" name="edit-employee").modal#modal-edit
+	form(action="/employee/:id/edit" method="post" name="edit-employee").modal.edit-modal
 		.modal-title
 			h3 Edit Customer
 			button(type="reset").mdi.mdi-close
@@ -199,7 +199,7 @@ block main
 							img.avatar-after-crop(src, alt)
 					button.btn.btn-primary.btn-show-modal Upload
 					button.btn.btn-warning.btn-clear-avatar Clear
-					.modal#modal-upload
+					.modal.upload-modal
 						.modal-title
 							h3 Upload image
 							button(type="reset").mdi.mdi-close

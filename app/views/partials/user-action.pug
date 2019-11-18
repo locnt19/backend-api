@@ -1,9 +1,9 @@
 .user-action
 	if user
-		.username= user
+		.username= user.name
 		nav.nav-actions
 			li
-				a(href="#") Profile
+				a(href="/employee/" + user._id) Profile
 			li
 				a(href="#") Change password
 			li

@@ -92,23 +92,28 @@ exports.list = function (req, res, next) {
 		if (err) {
 			return next(err);
 		} else {
-			Employee.find({}, function (err, employees) {
+			Employee.aggregate([{
+				$project: {
+					idEmployee: "$_id",
+					name: "$name"
+				}
+			}]).exec(function (err, employees) {
 				res.render('accounts', {
 					title: 'Manager Account',
-					user: req.user ? req.user.username : '',
+					user: req.user ? req.user : '',
 					accounts: users,
 					employees: employees,
 					messages: req.flash('info')
 				});
 				// console.log('users:', users);
 				// console.log('employees', employees);
-			})
+			});
 		}
 	})
 };
 
 exports.read = function (req, res) {
-	res.json(req.user);
+	res.json(req.body);
 };
 
 exports.userByID = function (req, res, next, id) {
@@ -127,13 +132,15 @@ exports.userByID = function (req, res, next, id) {
 };
 
 exports.update = function (req, res, next) {
-	User.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
-		if (err) {
-			return next(err);
-		} else {
-			res.json(user);
-		}
-	});
+	console.log(req.body);
+
+	// User.findByIdAndUpdate(req.user.id, req.body, function (err, user) {
+	// 	if (err) {
+	// 		return next(err);
+	// 	} else {
+	// 		res.json(user);
+	// 	}
+	// });
 };
 
 exports.delete = function (req, res, next) {

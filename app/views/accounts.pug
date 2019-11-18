@@ -15,8 +15,8 @@ block main
 			.dropdown
 				button.btn.btn-dropdown Actions
 				.dropdown-content
-					a(href="#").mdi.mdi-delete.delete-bg#btn-delete Delete account
-			button.btn.btn-primary#btn-new New account
+					a(href="#").mdi.mdi-delete.delete-bg.btn-open-delete-modal Delete account
+			button.btn.btn-primary.btn-open-new-modal New account
 		.table-wrapper(style="margin-top: 15px")
 			.row-justify
 				.table-showing
@@ -76,8 +76,8 @@ block main
 									span.check
 								else
 									span.close
-							td 
-								.btn-edit-more Reset password
+							td
+								span.btn-edit-more Reset password
 			.row-justify
 				nav.table-pagination
 					a(href="#").prev.disabled Previous
@@ -97,7 +97,7 @@ block main
 
 
 	//- =============== MODAL ===============
-	form(method="POST").modal#modal-new
+	form(method="POST").modal.new-modal
 		.modal-title
 			h3 New Account
 			button(type="reset").mdi.mdi-close
@@ -116,16 +116,17 @@ block main
 					option(value="2") Staff
 					option(value="3") Admin
 			.form-control
-				label(for="owner") Owner
-				input#owner-name( type="hidden" name="owner.name")
-				select(id="owner" name="owner._id")
-					option(value="0") Please choose...
-					-for(var i in employees)
+				label Owner
+				.list-owners
+					input(type="hidden" name="owner.name")
+					select(name="owner._id")
+						option(value="0") Please choose...
+						-for(var i in employees)
 							option(value= employees[i]._id)= employees[i].name
 		.modal-footer
 			button(type="submit").btn.btn-primary Save
 			button(type="reset") Cancel
-	form.modal.modal-warning#modal-delete
+	form.modal.modal-warning.delete-modal
 		.modal-title
 			h3 Delete Account
 			button(type="reset").mdi.mdi-close
@@ -152,20 +153,26 @@ block main
 		.modal-footer
 			button(type="submit").btn.btn-warning Delete account
 			button(type="reset") Cancel
-	form.modal#modal-edit
+	form(action="/edit/" method="POST").modal.edit-modal
 		.modal-title
 			h3 Reset Password
 			button(type="reset").mdi.mdi-close
 		.modal-body
-			.form-control
-				label(for="edit-name") Name
-				input(type="text" id="edit-name" value="Nguyen Thanh Loc" disabled)
+			input(type="hidden" id="edit-id" value="" disabled name="_id")
 			.form-control
 				label(for="edit-username") Username
-				input(type="text" id="edit-username" value="locdeptraithanhlichvodichkhapvutru" disabled)
+				input(type="text" id="edit-username" value="" disabled name="username")
+			.form-control
+				label(for="owner") Owner
+				.list-owners
+					input(type="hidden" id="edit-owner-name" name="owner.name")
+					select(id="edit-owner" name="owner._id")
+						option(value="0") Please choose...
+						-for(var i in employees)
+							option(value= employees[i]._id)= employees[i].name
 			.form-control
 				label(for="edit-password") Password
-				input(type="text" id="edit-password")
+				input(type="text" id="edit-password" name="password")
 			.form-control
 				label
 				button.random-password.btn.btn-warning Random password

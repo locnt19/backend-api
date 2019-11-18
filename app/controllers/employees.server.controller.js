@@ -23,7 +23,7 @@ exports.list = function (req, res, next) {
 		} else {
 			res.render('employees', {
 				title: 'Manager Employee',
-				user: req.user ? req.user.username : '',
+				user: req.user ? req.user : '',
 				employees: users,
 				messages: req.flash('info')
 			});
@@ -33,10 +33,14 @@ exports.list = function (req, res, next) {
 
 exports.read = function (req, res) {
 	res.render('employee-detail', {
-		title: 'Profile: ' + req.user.name,
-		userDetail: req.user,
+		title: 'Profile: ' + req.userProfile.name,
+		user: req.user ? req.user : '',
+		userProfile: req.userProfile,
 		messages: req.flash('info')
 	});
+	// console.log("userProfile: ", req.userProfile);
+	// console.log("userLogin: ", req.user);
+
 };
 
 exports.userByID = function (req, res, next, id) {
@@ -49,7 +53,7 @@ exports.userByID = function (req, res, next, id) {
 					title: 'Page not found'
 				});
 			} else {
-				req.user = user;
+				req.userProfile = user;
 				next();
 			}
 		}

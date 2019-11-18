@@ -6,40 +6,42 @@ block main
 			.flash= item
 	.employee-detail
 		.container
+			h1 Profile
 			.row-flex
-				if userDetail
+				if userProfile
 					.avatar
-						img(src= userDetail.avatar)
+						a(href= userProfile.avatar data-fancybox)
+							img(src= userProfile.avatar)
 					.detail
 						table
 							tr
 								th Name
-								td= userDetail.name
+								td= userProfile.name
 							tr
 								th Birthday
-								td= userDetail.birthday
+								td= userProfile.birthday
 							tr
 								th Type
-								td= userDetail.type
+								td= userProfile.type
 							tr
 								th Pay rate
-								td= userDetail.pay_rate
+								td= userProfile.pay_rate
 							tr
 								th Address
-								td= userDetail.address
+								td= userProfile.address
 							tr
 								th Phone
-								td= userDetail.phone
+								td= userProfile.phone
 							tr
 								th Seniority
-								td= userDetail.seniority
+								td= userProfile.seniority
 							tr
 								th Create At
-								td= userDetail.createdAt
+								td= userProfile.createdAt
 							tr
 								th Status
 								td
-									if userDetail.status
+									if userProfile.status
 										span.check
 									else
 										span.close
