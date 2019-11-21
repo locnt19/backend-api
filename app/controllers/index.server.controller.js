@@ -3,4 +3,5 @@ exports.render = function (req, res) {
 		title: 'MVC server',
 		user: req.user ? req.user : ''
 	});
+	console.log(req.user);
 };
