@@ -153,15 +153,15 @@ block main
 		.modal-footer
 			button(type="submit").btn.btn-warning Delete account
 			button(type="reset") Cancel
-	form(action="/edit/" method="POST").modal.edit-modal
+	form(action="/accounts/reset-password" method="POST").modal.edit-modal
 		.modal-title
 			h3 Reset Password
 			button(type="reset").mdi.mdi-close
 		.modal-body
-			input(type="hidden" id="edit-id" value="" disabled name="_id")
+			input(type="hidden" id="edit-id" value="" name="_id")
 			.form-control
 				label(for="edit-username") Username
-				input(type="text" id="edit-username" value="" disabled name="username")
+				input(type="text" id="edit-username" value="" readonly name="username")
 			.form-control
 				label(for="owner") Owner
 				.list-owners

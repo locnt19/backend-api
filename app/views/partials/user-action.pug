@@ -1,6 +1,8 @@
 .user-action
 	if user
-		.username= user.name
+		.username
+			span= user.username
+			span  ( #{user.owner.name} )
 		nav.nav-actions
 			li
 				a(href="/employee/" + user._id) Profile
@@ -8,3 +10,5 @@
 				a(href="#") Change password
 			li
 				a(href="/logout") Log out
+	else
+		a(href="/login") Login
